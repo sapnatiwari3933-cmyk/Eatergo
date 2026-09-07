@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff4d4d;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.search-bar input {
+  padding: 5px;
+  width: 200px;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: #ffe6e6;
+}
+
+.categories {
+  padding: 20px;
+}
+
+.category-list button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.restaurant-card {
+  background: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.restaurant-card img {
+  width: 100%;
+  border-radius: 8px;
+                             }
