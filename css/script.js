@@ -1,318 +1,456 @@
 /* =========================================================
-   EATERGO - MAIN JAVASCRIPT
-   Responsive / Vanilla JS
+   EATERGO - FINAL RESPONSIVE / CANVA STYLE
+   Matches current index.html + scripts.js
 ========================================================= */
 
-"use strict";
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-/* =========================================================
-   DATA
-========================================================= */
+:root{
+    --orange:#ff641f;
+    --orange-dark:#e95313;
+    --green:#16833f;
+    --black:#080808;
+    --white:#ffffff;
+    --bg:#f7f7f7;
+    --text:#171717;
+    --muted:#777;
+    --border:#e5e5e5;
+    --container:982px;
+}
 
-const categories = [
-    {
-        name: "All",
-        image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Pizza",
-        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Burgers",
-        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Indian",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Chinese",
-        image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Biryani",
-        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Cafe",
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Desserts",
-        image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-        name: "Healthy Food",
-        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80"
-    }
-];
+html{
+    scroll-behavior:smooth;
+}
 
-const restaurants = [
-    {
-        id: 1,
-        name: "The Urban Kitchen",
-        cuisine: "North Indian • Chinese",
-        rating: 4.7,
-        reviews: 1240,
-        price: "₹450 for two",
-        delivery: "25-30 min",
-        distance: "1.2 km",
-        offer: "40% OFF",
-        badge: "Bestseller",
-        category: ["Indian", "Chinese"],
-        image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=85"
-    },
-    {
-        id: 2,
-        name: "La Pino's Pizza",
-        cuisine: "Pizza • Italian",
-        rating: 4.6,
-        reviews: 980,
-        price: "₹500 for two",
-        delivery: "20-25 min",
-        distance: "1.8 km",
-        offer: "30% OFF",
-        badge: "Popular",
-        category: ["Pizza"],
-        image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=700&q=85"
-    },
-    {
-        id: 3,
-        name: "Burger Singh",
-        cuisine: "Burgers • Fast Food",
-        rating: 4.5,
-        reviews: 875,
-        price: "₹350 for two",
-        delivery: "20-25 min",
-        distance: "2.1 km",
-        offer: "25% OFF",
-        badge: "Popular",
-        category: ["Burgers"],
-        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85"
-    },
-    {
-        id: 4,
-        name: "Biryani Blues",
-        cuisine: "Biryani • Mughlai",
-        rating: 4.8,
-        reviews: 1560,
-        price: "₹550 for two",
-        delivery: "25-30 min",
-        distance: "1.5 km",
-        offer: "₹125 OFF",
-        badge: "Top Rated",
-        category: ["Biryani", "Indian"],
-        image: "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=700&q=85"
-    },
-    {
-        id: 5,
-        name: "Wok This Way",
-        cuisine: "Chinese • Asian",
-        rating: 4.4,
-        reviews: 720,
-        price: "₹400 for two",
-        delivery: "25-30 min",
-        distance: "2.4 km",
-        offer: "20% OFF",
-        badge: "New",
-        category: ["Chinese"],
-        image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=700&q=85"
-    },
-    {
-        id: 6,
-        name: "Green Bowl Cafe",
-        cuisine: "Healthy • Salads • Cafe",
-        rating: 4.7,
-        reviews: 640,
-        price: "₹450 for two",
-        delivery: "15-20 min",
-        distance: "1.9 km",
-        offer: "15% OFF",
-        badge: "Healthy",
-        category: ["Healthy Food", "Cafe"],
-        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=85"
-    }
-];
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    font-size:13px;
+}
 
-const offers = [
-    {
-        title: "Up to 50% OFF",
-        subtitle: "On your first order",
-        button: "ORDER NOW",
-        className: "",
-        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85"
-    },
-    {
-        title: "Flat ₹125 OFF",
-        subtitle: "Use code EATER125",
-        button: "COPY CODE",
-        className: "light-offer",
-        image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
-    },
-    {
-        title: "Free Delivery",
-        subtitle: "On selected restaurants",
-        button: "EXPLORE",
-        className: "green-offer",
-        image: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=900&q=85"
-    }
-];
+button,
+input{
+    font:inherit;
+}
 
-const dishes = [
-    {
-        id: 101,
-        name: "Butter Chicken",
-        restaurant: "The Urban Kitchen",
-        category: "Indian",
-        price: 289,
-        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=85"
-    },
-    {
-        id: 102,
-        name: "Margherita Pizza",
-        restaurant: "La Pino's Pizza",
-        category: "Pizza",
-        price: 249,
-        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=85"
-    },
-    {
-        id: 103,
-        name: "Chicken Burger",
-        restaurant: "Burger Singh",
-        category: "Burgers",
-        price: 199,
-        image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=85"
-    },
-    {
-        id: 104,
-        name: "Hyderabadi Biryani",
-        restaurant: "Biryani Blues",
-        category: "Biryani",
-        price: 319,
-        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=85"
-    },
-    {
-        id: 105,
-        name: "Veg Hakka Noodles",
-        restaurant: "Wok This Way",
-        category: "Chinese",
-        price: 229,
-        image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=85"
-    },
-    {
-        id: 106,
-        name: "Avocado Power Bowl",
-        restaurant: "Green Bowl Cafe",
-        category: "Healthy Food",
-        price: 279,
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=85"
-    }
-];
+button{
+    cursor:pointer;
+}
 
-const collections = [
-    {
-        title: "Best of Indian",
-        description: "Rich flavours & authentic recipes",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
-    },
-    {
-        title: "Late Night Cravings",
-        description: "Food that hits different at night",
-        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=85"
-    },
-    {
-        title: "Healthy & Fresh",
-        description: "Fresh food for a better you",
-        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=85"
-    }
-];
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let selectedCategory = "All";
-
-let cart = getStorage("eatergoCart", []);
-
-let favourites = getStorage(
-    "eatergoFavourites",
-    []
-);
-
-let toastTimer = null;
-
-
-/* =========================================================
-   DOM READY
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    renderCategories();
-    renderRestaurants();
-    renderOffers();
-    renderDishes();
-    renderCollections();
-
-    setupSearch();
-    setupTheme();
-    setupMobileMenu();
-    setupLocationButtons();
-    setupHeaderButtons();
-    setupOfferSlider();
-
-    updateCartCount();
-    restoreLocation();
-
-});
-
-
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
-
-function getStorage(key, fallback) {
-
-    try {
-
-        const value =
-            localStorage.getItem(key);
-
-        return value
-            ? JSON.parse(value)
-            : fallback;
-
-    } catch (error) {
-
-        console.warn(
-            `Could not read ${key}`,
-            error
-        );
-
-        return fallback;
-    }
+img{
+    display:block;
+    max-width:100%;
 }
 
 
-function saveStorage(key, value) {
+/* =========================================================
+   HEADER
+========================================================= */
 
-    try {
+.main-header{
+    height:58px;
+    background:#080808;
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #171717;
+}
 
-        localStorage.setItem(
-            key,
-            JSON.stringify(value)
-        );
+.header-inner{
+    width:min(var(--container),calc(100% - 36px));
+    height:100%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
 
-    } catch (error) {
+.logo{
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+    font-weight:800;
+    letter-spacing:-1.1px;
+}
 
-        console.warn(
-            `Could not save ${key}`,
-            error
-        );
-    }
+.logo-chef{
+    width:27px;
+    height:27px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:3px;
+}
+
+.logo-chef svg{
+    width:27px;
+    height:27px;
+}
+
+.logo-text{
+    font-size:24px;
+    color:#fff;
+}
+
+.logo-text span{
+    color:var(--orange);
+}
+
+.location-selector{
+    height:31px;
+    min-width:72px;
+    padding:0 9px;
+    border:1px solid #333;
+    border-radius:18px;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    font-size:10px;
+}
+
+.location-icon{
+    display:flex;
+    color:var(--orange);
+}
+
+.location-icon svg{
+    width:12px;
+    height:12px;
+}
+
+.chevron-icon{
+    width:10px;
+    height:10px;
+    color:#aaa;
+}
+
+.header-search{
+    height:31px;
+    width:260px;
+    background:#fff;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:0 11px;
+    color:#777;
+}
+
+.header-search svg{
+    width:13px;
+    height:13px;
+    flex:none;
+}
+
+.header-search input{
+    width:100%;
+    border:0;
+    outline:0;
+    font-size:9px;
+    color:#222;
+    background:transparent;
+}
+
+.desktop-nav{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    height:100%;
+    gap:23px;
+    font-size:10px;
+    font-weight:700;
+    color:#ddd;
+}
+
+.nav-link{
+    height:100%;
+    display:flex;
+    align-items:center;
+    border-bottom:2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color:var(--orange);
+    border-color:var(--orange);
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.icon-button{
+    position:relative;
+    width:29px;
+    height:29px;
+    border:0;
+    border-radius:50%;
+    background:transparent;
+    display:grid;
+    place-items:center;
+    color:#fff;
+}
+
+.icon-button svg{
+    width:17px;
+    height:17px;
+}
+
+.icon-button:hover{
+    background:#191919;
+}
+
+.moon-icon{
+    display:none;
+}
+
+.theme-button.dark .sun-icon{
+    display:none;
+}
+
+.theme-button.dark .moon-icon{
+    display:block;
+}
+
+.login-button,
+.signup-button{
+    height:29px;
+    padding:0 11px;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:9px;
+    font-weight:700;
+}
+
+.login-button{
+    border:1px solid #3a3a3a;
+    color:#fff;
+    background:transparent;
+}
+
+.signup-button{
+    background:var(--orange);
+    color:#fff;
+    border:1px solid var(--orange);
+}
+
+.signup-button:hover{
+    background:var(--orange-dark);
+}
+
+.cart-count{
+    position:absolute;
+    top:-3px;
+    right:-2px;
+    min-width:14px;
+    height:14px;
+    padding:0 3px;
+    border-radius:10px;
+    background:var(--orange);
+    color:#fff;
+    font-size:7px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-style:normal;
+}
+
+.mobile-menu-button{
+    display:none;
+    background:none;
+    border:0;
+}
+
+.mobile-menu-button span{
+    display:block;
+    width:21px;
+    height:2px;
+    background:#fff;
+    margin:4px 0;
+}
+
+.mobile-menu{
+    display:none;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    height:173px;
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.88) 0%,
+            rgba(0,0,0,.62) 40%,
+            rgba(0,0,0,.12) 78%
+        ),
+        url("https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1600&q=90")
+        center 53% / cover no-repeat;
+}
+
+.hero-inner{
+    width:min(var(--container),calc(100% - 36px));
+    height:100%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+}
+
+.hero-content{
+    width:620px;
+    margin-top:2px;
+}
+
+.hero-eyebrow{
+    font-size:9px;
+    letter-spacing:1.6px;
+    color:#ddd;
+    margin-bottom:7px;
+}
+
+.hero-eyebrow span{
+    color:var(--orange);
+    margin:0 3px;
+}
+
+.hero h1{
+    font-size:31px;
+    line-height:1.05;
+    letter-spacing:-1.3px;
+    font-weight:800;
+}
+
+.hero h1 span{
+    color:var(--orange);
+}
+
+.hero p{
+    font-size:11px;
+    color:#eee;
+    margin:6px 0 12px;
+}
+
+.hero-search{
+    width:435px;
+    height:35px;
+    background:#fff;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    padding:3px;
+    color:#222;
+    box-shadow:0 3px 12px rgba(0,0,0,.14);
+}
+
+.hero-location{
+    height:100%;
+    width:83px;
+    border:0;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:9px;
+    font-weight:700;
+    color:#333;
+}
+
+.hero-location svg:first-child{
+    width:12px;
+    height:12px;
+    color:var(--orange);
+}
+
+.hero-chevron{
+    width:9px;
+    height:9px;
+    color:#999;
+}
+
+.hero-divider{
+    width:1px;
+    height:20px;
+    background:#ddd;
+}
+
+.hero-search-input{
+    flex:1;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:0 9px;
+    color:#888;
+}
+
+.hero-search-input svg{
+    width:12px;
+    height:12px;
+    flex:none;
+}
+
+.hero-search-input input{
+    width:100%;
+    border:0;
+    outline:0;
+    font-size:9px;
+    color:#222;
+}
+
+.hero-search-button{
+    height:29px;
+    padding:0 18px;
+    border:0;
+    border-radius:16px;
+    background:var(--orange);
+    color:#fff;
+    font-size:9px;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-content{
+    background:#fff;
+}
+
+.section{
+    width:min(var(--container),calc(100% - 36px));
+    margin:auto;
 }
 
 
@@ -320,76 +458,134 @@ function saveStorage(key, value) {
    CATEGORIES
 ========================================================= */
 
-function renderCategories() {
+.category-section{
+    height:91px;
+    display:flex;
+    align-items:center;
+    position:relative;
+}
 
-    const container =
-        document.getElementById(
-            "categoryContainer"
-        );
+.category-container{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    overflow:hidden;
+}
 
-    if (!container) return;
+.category-card{
+    flex:0 0 76px;
+    border:0;
+    background:transparent;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    color:#222;
+}
 
-    container.innerHTML =
-        categories.map(category => {
+.category-image{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#fff3e9;
+    box-shadow:0 0 0 4px #fff3e9;
+    transition:.18s;
+}
 
-            const active =
-                category.name ===
-                selectedCategory
-                    ? "active"
-                    : "";
+.category-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-            return `
-                <button
-                    type="button"
-                    class="category-card ${active}"
-                    data-category="${escapeHTML(category.name)}"
-                >
+.category-card:hover .category-image{
+    transform:translateY(-2px);
+}
 
-                    <div class="category-image">
+.category-card.active .category-image{
+    box-shadow:
+        0 0 0 3px #ffe6d8,
+        0 0 0 4px var(--orange);
+}
 
-                        <img
-                            src="${category.image}"
-                            alt="${escapeHTML(category.name)}"
-                            loading="lazy"
-                        >
+.category-name{
+    font-size:9px;
+    font-weight:700;
+    white-space:nowrap;
+}
 
-                    </div>
+.slider-arrow{
+    border:1px solid #ddd;
+    background:#fff;
+    color:#777;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+}
 
-                    <span class="category-name">
-                        ${escapeHTML(category.name)}
-                    </span>
+.slider-arrow svg{
+    width:13px;
+    height:13px;
+}
 
-                </button>
-            `;
+.category-section > .slider-next{
+    position:absolute;
+    right:-8px;
+    width:27px;
+    height:27px;
+}
 
-        }).join("");
 
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
 
-    container
-        .querySelectorAll(
-            ".category-card"
-        )
-        .forEach(button => {
+.section-header{
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
-            button.addEventListener(
-                "click",
-                () => {
+.section-title-wrap{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
 
-                    selectedCategory =
-                        button.dataset.category;
+.section-title-icon{
+    width:18px;
+    height:18px;
+    display:grid;
+    place-items:center;
+    color:var(--orange);
+}
 
-                    renderCategories();
-                    renderRestaurants();
-                    renderDishes();
+.section-title-icon svg{
+    width:17px;
+    height:17px;
+}
 
-                    scrollToSection(
-                        "restaurantGrid"
-                    );
+.section-header h2{
+    font-size:12px;
+    font-weight:800;
+}
 
-                }
-            );
+.view-all{
+    display:flex;
+    align-items:center;
+    gap:3px;
+    color:var(--orange);
+    font-size:8px;
+    font-weight:800;
+}
 
-        });
+.view-all svg{
+    width:11px;
+    height:11px;
 }
 
 
@@ -397,250 +593,207 @@ function renderCategories() {
    RESTAURANTS
 ========================================================= */
 
-function renderRestaurants(
-    restaurantList = null
-) {
-
-    const grid =
-        document.getElementById(
-            "restaurantGrid"
-        );
-
-    if (!grid) return;
-
-
-    let list;
-
-
-    if (restaurantList) {
-
-        list = restaurantList;
-
-    } else if (
-        selectedCategory === "All"
-    ) {
-
-        list = restaurants;
-
-    } else {
-
-        list =
-            restaurants.filter(
-                restaurant =>
-                    restaurant.category.includes(
-                        selectedCategory
-                    )
-            );
-
-    }
-
-
-    if (!list.length) {
-
-        grid.innerHTML = `
-            <div class="empty-state">
-                No restaurants found.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    grid.innerHTML =
-        list.map(createRestaurantCard)
-            .join("");
-
-
-    setupFavouriteButtons();
+.restaurant-section{
+    padding-bottom:18px;
 }
 
-
-/* =========================================================
-   RESTAURANT CARD
-========================================================= */
-
-function createRestaurantCard(
-    restaurant
-) {
-
-    const favourite =
-        favourites.includes(
-            restaurant.id
-        );
-
-    return `
-        <article
-            class="restaurant-card"
-            data-id="${restaurant.id}"
-        >
-
-            <div class="restaurant-image">
-
-                <img
-                    src="${restaurant.image}"
-                    alt="${escapeHTML(restaurant.name)}"
-                    loading="lazy"
-                >
-
-                <span class="restaurant-badge">
-                    ${escapeHTML(restaurant.badge)}
-                </span>
-
-                <button
-                    type="button"
-                    class="restaurant-favourite ${
-                        favourite ? "active" : ""
-                    }"
-                    data-favourite="${restaurant.id}"
-                    aria-label="${
-                        favourite
-                            ? "Remove from favourites"
-                            : "Add to favourites"
-                    }"
-                >
-                    <span class="heart-icon"></span>
-                </button>
-
-            </div>
-
-
-            <div class="restaurant-info">
-
-                <h3 class="restaurant-name">
-                    ${escapeHTML(restaurant.name)}
-                </h3>
-
-
-                <div class="restaurant-rating">
-
-                    <span class="rating-star">
-                        ★
-                    </span>
-
-                    ${restaurant.rating}
-
-                    <span>
-                        (${restaurant.reviews})
-                    </span>
-
-                </div>
-
-
-                <div class="restaurant-cuisine">
-                    ${escapeHTML(restaurant.cuisine)}
-                </div>
-
-
-                <div class="restaurant-price">
-                    ${escapeHTML(restaurant.price)}
-                </div>
-
-
-                <div class="restaurant-meta">
-
-                    <span class="restaurant-delivery">
-
-                        <span class="clock-icon"></span>
-
-                        ${escapeHTML(
-                            restaurant.delivery
-                        )}
-
-                    </span>
-
-
-                    <span class="restaurant-offer">
-                        ${escapeHTML(
-                            restaurant.offer
-                        )}
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-    `;
+.restaurant-grid{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:13px;
 }
 
+.restaurant-card{
+    background:#fff;
+    border:1px solid #e3e3e3;
+    border-radius:7px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,.045);
+    transition:.18s;
+    min-width:0;
+}
 
-/* =========================================================
-   FAVOURITES
-========================================================= */
+.restaurant-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 7px 16px rgba(0,0,0,.09);
+}
 
-function setupFavouriteButtons() {
+.restaurant-image{
+    height:62px;
+    position:relative;
+    background:#eee;
+}
 
-    document
-        .querySelectorAll(
-            "[data-favourite]"
-        )
-        .forEach(button => {
+.restaurant-image > img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-            button.addEventListener(
-                "click",
-                event => {
+.restaurant-badge{
+    position:absolute;
+    top:5px;
+    left:5px;
+    background:var(--orange);
+    color:#fff;
+    border-radius:3px;
+    padding:2px 4px;
+    font-size:6px;
+    font-weight:800;
+}
 
-                    event.stopPropagation();
+.restaurant-favourite,
+.dish-heart{
+    position:absolute;
+    right:5px;
+    top:5px;
+    width:20px;
+    height:20px;
+    border:0;
+    border-radius:50%;
+    background:rgba(0,0,0,.48);
+    display:grid;
+    place-items:center;
+}
 
-                    const id =
-                        Number(
-                            button.dataset.favourite
-                        );
+.restaurant-favourite:hover,
+.dish-heart:hover{
+    background:rgba(0,0,0,.7);
+}
 
+.restaurant-favourite.active,
+.dish-heart.active{
+    background:var(--orange);
+}
 
-                    if (
-                        favourites.includes(id)
-                    ) {
+.heart-icon{
+    width:11px;
+    height:11px;
+    display:block;
+    position:relative;
+}
 
-                        favourites =
-                            favourites.filter(
-                                item =>
-                                    item !== id
-                            );
+.heart-icon::before{
+    content:"";
+    position:absolute;
+    width:9px;
+    height:9px;
+    left:1px;
+    top:1px;
+    background:#fff;
+    transform:rotate(45deg);
+    border-radius:2px;
+}
 
-                        button.classList.remove(
-                            "active"
-                        );
+.heart-icon::after{
+    content:"";
+    position:absolute;
+    width:11px;
+    height:7px;
+    left:0;
+    top:0;
+    background:#fff;
+    border-radius:8px 8px 2px 2px;
+}
 
-                        button.setAttribute(
-                            "aria-label",
-                            "Add to favourites"
-                        );
+.restaurant-info{
+    padding:7px;
+}
 
-                        showToast(
-                            "Removed from favourites"
-                        );
+.restaurant-name{
+    font-size:9px;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 
-                    } else {
+.restaurant-rating{
+    margin:3px 0;
+    color:var(--green);
+    font-size:7px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:2px;
+}
 
-                        favourites.push(id);
+.rating-star{
+    font-size:8px;
+    color:var(--green);
+}
 
-                        button.classList.add(
-                            "active"
-                        );
+.restaurant-rating span:last-child{
+    color:#777;
+    font-weight:500;
+}
 
-                        button.setAttribute(
-                            "aria-label",
-                            "Remove from favourites"
-                        );
+.restaurant-cuisine,
+.restaurant-price{
+    font-size:7px;
+    color:#777;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 
-                        showToast(
-                            "Added to favourites"
-                        );
+.restaurant-price{
+    margin-top:2px;
+}
 
-                    }
+.restaurant-meta{
+    margin-top:6px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:3px;
+    font-size:6px;
+    color:#777;
+}
 
+.restaurant-delivery{
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:3px;
+}
 
-                    saveStorage(
-                        "eatergoFavourites",
-                        favourites
-                    );
+.clock-icon{
+    width:9px;
+    height:9px;
+    border:1px solid #888;
+    border-radius:50%;
+    position:relative;
+    display:inline-block;
+}
 
-                }
-            );
+.clock-icon::before{
+    content:"";
+    position:absolute;
+    width:1px;
+    height:3px;
+    background:#888;
+    left:3px;
+    top:1px;
+}
 
-        });
+.clock-icon::after{
+    content:"";
+    position:absolute;
+    width:3px;
+    height:1px;
+    background:#888;
+    left:3px;
+    top:4px;
+}
+
+.restaurant-offer{
+    background:#e5f6ea;
+    color:var(--green);
+    padding:3px 4px;
+    border-radius:3px;
+    font-weight:800;
+    white-space:nowrap;
 }
 
 
@@ -648,147 +801,113 @@ function setupFavouriteButtons() {
    OFFERS
 ========================================================= */
 
-function renderOffers() {
-
-    const grid =
-        document.getElementById(
-            "offerGrid"
-        );
-
-    if (!grid) return;
-
-
-    grid.innerHTML =
-        offers.map(
-            (offer, index) => {
-
-                return `
-                    <article
-                        class="offer-card ${
-                            offer.className
-                        }"
-                    >
-
-                        <img
-                            src="${offer.image}"
-                            alt="${escapeHTML(
-                                offer.title
-                            )}"
-                            loading="lazy"
-                        >
-
-                        <div class="offer-content">
-
-                            <h3 class="offer-title">
-                                ${escapeHTML(
-                                    offer.title
-                                )}
-                            </h3>
-
-                            <p class="offer-subtitle">
-                                ${escapeHTML(
-                                    offer.subtitle
-                                )}
-                            </p>
-
-                            <button
-                                type="button"
-                                class="offer-button"
-                                data-offer="${index}"
-                            >
-                                ${escapeHTML(
-                                    offer.button
-                                )}
-                            </button>
-
-                        </div>
-
-                    </article>
-                `;
-
-            }
-        ).join("");
-
-
-    grid
-        .querySelectorAll(
-            "[data-offer]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const index =
-                        Number(
-                            button.dataset.offer
-                        );
-
-                    const offer =
-                        offers[index];
-
-
-                    if (
-                        offer.button ===
-                        "COPY CODE"
-                    ) {
-
-                        copyCoupon();
-
-                    } else {
-
-                        showToast(
-                            "Opening offer..."
-                        );
-
-                    }
-
-                }
-            );
-
-        });
+.offers-section{
+    width:min(var(--container),calc(100% - 36px));
+    margin:auto;
+    padding-bottom:12px;
 }
 
+.offers-section .section-header{
+    height:36px;
+}
 
-/* =========================================================
-   COUPON
-========================================================= */
+.arrows{
+    display:flex;
+    gap:5px;
+}
 
-function copyCoupon() {
+.arrows button{
+    width:25px;
+    height:25px;
+}
 
-    const code = "EATER125";
+.offer-slider{
+    overflow:hidden;
+}
 
+.offer-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+}
 
-    if (
-        navigator.clipboard &&
-        window.isSecureContext
-    ) {
+.offer-card{
+    height:78px;
+    position:relative;
+    overflow:hidden;
+    border-radius:7px;
+    color:#fff;
+    background:#222;
+}
 
-        navigator.clipboard
-            .writeText(code)
-            .then(() => {
+.offer-card > img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-                showToast(
-                    `${code} copied`
-                );
+.offer-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,.78),
+        rgba(0,0,0,.12)
+    );
+}
 
-            })
-            .catch(() => {
+.offer-content{
+    position:relative;
+    z-index:2;
+    padding:13px 15px;
+}
 
-                showToast(
-                    `Coupon: ${code}`
-                );
+.offer-content h3{
+    margin:2px 0;
+    font-size:14px;
+    line-height:1.05;
+}
 
-            });
+.offer-content p{
+    font-size:6px;
+    margin-bottom:7px;
+    color:#eee;
+}
 
-    } else {
+.offer-content small{
+    font-size:6px;
+    color:#ddd;
+}
 
-        showToast(
-            `Coupon: ${code}`
-        );
+.offer-content button{
+    border:0;
+    border-radius:4px;
+    background:var(--orange);
+    color:#fff;
+    padding:4px 7px;
+    font-size:6px;
+    font-weight:800;
+}
 
-    }
+.slider-dots{
+    display:flex;
+    justify-content:center;
+    gap:4px;
+    margin:8px 0 0;
+}
+
+.slider-dots span{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#d5d5d5;
+}
+
+.slider-dots span.active{
+    background:var(--orange);
 }
 
 
@@ -796,591 +915,87 @@ function copyCoupon() {
    DISHES
 ========================================================= */
 
-function renderDishes(
-    dishList = null
-) {
-
-    const grid =
-        document.getElementById(
-            "dishGrid"
-        );
-
-    if (!grid) return;
-
-
-    let list;
-
-
-    if (dishList) {
-
-        list = dishList;
-
-    } else if (
-        selectedCategory === "All"
-    ) {
-
-        list = dishes;
-
-    } else {
-
-        list =
-            dishes.filter(
-                dish =>
-                    dish.category ===
-                    selectedCategory
-            );
-
-    }
-
-
-    if (!list.length) {
-
-        grid.innerHTML = `
-            <div class="empty-state">
-                No dishes found.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    grid.innerHTML =
-        list.map(createDishCard)
-            .join("");
-
-
-    setupDishButtons();
+.dishes-section{
+    padding-bottom:20px;
 }
 
-
-/* =========================================================
-   DISH CARD
-========================================================= */
-
-function createDishCard(dish) {
-
-    const favourite =
-        favourites.includes(
-            dish.id
-        );
-
-    return `
-        <article
-            class="dish-card"
-            data-dish-id="${dish.id}"
-        >
-
-            <div class="dish-image">
-
-                <img
-                    src="${dish.image}"
-                    alt="${escapeHTML(dish.name)}"
-                    loading="lazy"
-                >
-
-
-                <button
-                    type="button"
-                    class="dish-heart ${
-                        favourite ? "active" : ""
-                    }"
-                    data-dish-favourite="${dish.id}"
-                    aria-label="${
-                        favourite
-                            ? "Remove dish from favourites"
-                            : "Favourite dish"
-                    }"
-                >
-                    <span class="heart-icon"></span>
-                </button>
-
-            </div>
-
-
-            <div class="dish-info">
-
-                <h3 class="dish-name">
-                    ${escapeHTML(dish.name)}
-                </h3>
-
-
-                <p class="dish-restaurant">
-                    ${escapeHTML(
-                        dish.restaurant
-                    )}
-                </p>
-
-
-                <div class="dish-bottom">
-
-                    <span class="dish-price">
-                        ₹${dish.price}
-                    </span>
-
-
-                    <button
-                        type="button"
-                        class="add-dish-button"
-                        data-dish="${dish.id}"
-                    >
-                        ADD +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-    `;
+.dish-grid{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:13px;
 }
 
-
-/* =========================================================
-   DISH BUTTONS
-========================================================= */
-
-function setupDishButtons() {
-
-    document
-        .querySelectorAll(
-            "[data-dish]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    const id =
-                        Number(
-                            button.dataset.dish
-                        );
-
-                    const dish =
-                        dishes.find(
-                            item =>
-                                item.id === id
-                        );
-
-                    if (!dish) return;
-
-
-                    addToCart({
-                        id: dish.id,
-                        name: dish.name,
-                        price: dish.price,
-                        image: dish.image,
-                        restaurant:
-                            dish.restaurant,
-                        quantity: 1
-                    });
-
-                }
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-dish-favourite]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    const id =
-                        Number(
-                            button.dataset
-                                .dishFavourite
-                        );
-
-
-                    if (
-                        favourites.includes(id)
-                    ) {
-
-                        favourites =
-                            favourites.filter(
-                                item =>
-                                    item !== id
-                            );
-
-                        button.classList.remove(
-                            "active"
-                        );
-
-                    } else {
-
-                        favourites.push(id);
-
-                        button.classList.add(
-                            "active"
-                        );
-
-                    }
-
-
-                    saveStorage(
-                        "eatergoFavourites",
-                        favourites
-                    );
-
-                }
-            );
-
-        });
+.dish-card{
+    background:#fff;
+    border:1px solid #e3e3e3;
+    border-radius:7px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+    position:relative;
+    min-width:0;
 }
 
-
-/* =========================================================
-   CART
-========================================================= */
-
-function addToCart(item) {
-
-    const existing =
-        cart.find(
-            cartItem =>
-                cartItem.id === item.id
-        );
-
-
-    if (existing) {
-
-        existing.quantity += 1;
-
-    } else {
-
-        cart.push(item);
-
-    }
-
-
-    saveStorage(
-        "eatergoCart",
-        cart
-    );
-
-
-    updateCartCount();
-
-    showToast(
-        `${item.name} added to cart`
-    );
+.dish-image{
+    height:62px;
+    position:relative;
+    background:#eee;
 }
 
-
-function updateCartCount() {
-
-    const total =
-        cart.reduce(
-            (sum, item) =>
-                sum +
-                Number(
-                    item.quantity || 0
-                ),
-            0
-        );
-
-
-    const desktopCount =
-        document.getElementById(
-            "cartCount"
-        );
-
-    const mobileCount =
-        document.getElementById(
-            "mobileCartCount"
-        );
-
-
-    updateCountElement(
-        desktopCount,
-        total
-    );
-
-    updateCountElement(
-        mobileCount,
-        total
-    );
+.dish-image > img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-
-function updateCountElement(
-    element,
-    total
-) {
-
-    if (!element) return;
-
-    element.textContent = total;
-
-    element.style.display =
-        total > 0
-            ? "flex"
-            : "none";
+.dish-heart{
+    display:grid;
 }
 
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function setupSearch() {
-
-    const headerSearch =
-        document.getElementById(
-            "headerSearch"
-        );
-
-    const heroSearch =
-        document.getElementById(
-            "heroSearch"
-        );
-
-    const heroSearchBtn =
-        document.getElementById(
-            "heroSearchBtn"
-        );
-
-
-    if (headerSearch) {
-
-        headerSearch.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    performSearch(
-                        headerSearch.value
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (heroSearch) {
-
-        heroSearch.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    performSearch(
-                        heroSearch.value
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (heroSearchBtn) {
-
-        heroSearchBtn.addEventListener(
-            "click",
-            () => {
-
-                performSearch(
-                    heroSearch
-                        ? heroSearch.value
-                        : ""
-                );
-
-            }
-        );
-
-    }
+.dish-info{
+    padding:7px;
 }
 
-
-function performSearch(value) {
-
-    const search =
-        String(value || "")
-            .trim()
-            .toLowerCase();
-
-
-    if (!search) {
-
-        showToast(
-            "Please enter something to search"
-        );
-
-        return;
-    }
-
-
-    const restaurantMatches =
-        restaurants.filter(
-            restaurant => {
-
-                return (
-                    restaurant.name
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    restaurant.cuisine
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    restaurant.category.some(
-                        category =>
-                            category
-                                .toLowerCase()
-                                .includes(search)
-                    )
-                );
-
-            }
-        );
-
-
-    const dishMatches =
-        dishes.filter(
-            dish => {
-
-                return (
-                    dish.name
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    dish.restaurant
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    dish.category
-                        .toLowerCase()
-                        .includes(search)
-                );
-
-            }
-        );
-
-
-    if (
-        restaurantMatches.length === 0 &&
-        dishMatches.length === 0
-    ) {
-
-        showToast(
-            `No results for "${value}"`
-        );
-
-        return;
-    }
-
-
-    renderSearchRestaurants(
-        restaurantMatches
-    );
-
-    renderSearchDishes(
-        dishMatches
-    );
-
-
-    scrollToSection(
-        "restaurantGrid"
-    );
-
-
-    showToast(
-        `${
-            restaurantMatches.length +
-            dishMatches.length
-        } results found`
-    );
+.dish-name{
+    font-size:9px;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-
-/* =========================================================
-   SEARCH RESULTS
-========================================================= */
-
-function renderSearchRestaurants(
-    results
-) {
-
-    const grid =
-        document.getElementById(
-            "restaurantGrid"
-        );
-
-    if (!grid) return;
-
-
-    grid.innerHTML =
-        results.length
-            ? results
-                .map(createRestaurantCard)
-                .join("")
-            : `
-                <div class="empty-state">
-                    No matching restaurants.
-                </div>
-            `;
-
-
-    setupFavouriteButtons();
+.dish-restaurant{
+    margin:3px 0 6px;
+    font-size:7px;
+    color:#777;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
+.dish-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:4px;
+}
 
-function renderSearchDishes(
-    results
-) {
+.dish-price{
+    font-size:9px;
+    font-weight:800;
+}
 
-    const grid =
-        document.getElementById(
-            "dishGrid"
-        );
+.add-dish-button{
+    border:0;
+    border-radius:4px;
+    background:var(--orange);
+    color:#fff;
+    padding:4px 7px;
+    font-size:6px;
+    font-weight:800;
+}
 
-    if (!grid) return;
-
-
-    grid.innerHTML =
-        results.length
-            ? results
-                .map(createDishCard)
-                .join("")
-            : `
-                <div class="empty-state">
-                    No matching dishes.
-                </div>
-            `;
-
-
-    setupDishButtons();
+.add-dish-button:hover{
+    background:var(--orange-dark);
 }
 
 
@@ -1388,405 +1003,236 @@ function renderSearchDishes(
    COLLECTIONS
 ========================================================= */
 
-function renderCollections() {
+.collections-section{
+    padding-bottom:22px;
+}
 
-    const grid =
-        document.getElementById(
-            "collectionGrid"
-        );
+.collection-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:13px;
+}
 
-    if (!grid) return;
+.collection-card{
+    height:100px;
+    position:relative;
+    overflow:hidden;
+    border-radius:7px;
+    color:#fff;
+}
 
+.collection-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.25s;
+}
 
-    grid.innerHTML =
-        collections
-            .map(collection => {
+.collection-card:hover img{
+    transform:scale(1.04);
+}
 
-                return `
-                    <article
-                        class="collection-card"
-                    >
+.collection-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        0deg,
+        rgba(0,0,0,.78),
+        transparent 75%
+    );
+}
 
-                        <img
-                            src="${collection.image}"
-                            alt="${escapeHTML(
-                                collection.title
-                            )}"
-                            loading="lazy"
-                        >
+.collection-content{
+    position:absolute;
+    left:12px;
+    bottom:10px;
+    z-index:2;
+}
 
-                        <div
-                            class="collection-content"
-                        >
+.collection-title{
+    font-size:12px;
+}
 
-                            <h3
-                                class="collection-title"
-                            >
-                                ${escapeHTML(
-                                    collection.title
-                                )}
-                            </h3>
-
-                            <p
-                                class="collection-description"
-                            >
-                                ${escapeHTML(
-                                    collection.description
-                                )}
-                            </p>
-
-                        </div>
-
-                    </article>
-                `;
-
-            })
-            .join("");
+.collection-description{
+    margin-top:2px;
+    font-size:7px;
+    color:#ddd;
 }
 
 
 /* =========================================================
-   THEME
+   WHY EATERGO
 ========================================================= */
 
-function setupTheme() {
+.why-section{
+    background:#f2f2f2;
+    padding:25px 0 28px;
+}
 
-    const button =
-        document.getElementById(
-            "themeBtn"
-        );
+.why-inner{
+    width:min(var(--container),calc(100% - 36px));
+    margin:auto;
+}
 
-    if (!button) return;
+.why-heading{
+    text-align:center;
+    margin-bottom:18px;
+}
 
+.small-label{
+    font-size:7px;
+    letter-spacing:1.5px;
+    color:var(--orange);
+    font-weight:800;
+}
 
-    const savedTheme =
-        localStorage.getItem(
-            "eatergoTheme"
-        );
+.why-heading h2{
+    font-size:22px;
+    margin:5px 0;
+}
 
+.why-heading h2 span{
+    color:var(--orange);
+}
 
-    if (savedTheme === "dark") {
+.why-heading p{
+    font-size:9px;
+    color:#777;
+}
 
-        document.body.classList.add(
-            "dark-mode"
-        );
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
 
-    }
+.why-card{
+    background:#fff;
+    border:1px solid #e4e4e4;
+    border-radius:7px;
+    padding:16px;
+    text-align:center;
+}
 
+.why-icon{
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#fff1e9;
+    color:var(--orange);
+    display:grid;
+    place-items:center;
+    margin:0 auto 8px;
+}
 
-    button.addEventListener(
-        "click",
-        () => {
+.why-icon svg{
+    width:16px;
+    height:16px;
+}
 
-            document.body.classList.toggle(
-                "dark-mode"
-            );
+.why-card h3{
+    font-size:10px;
+}
 
-
-            const dark =
-                document.body.classList.contains(
-                    "dark-mode"
-                );
-
-
-            localStorage.setItem(
-                "eatergoTheme",
-                dark
-                    ? "dark"
-                    : "light"
-            );
-
-
-            showToast(
-                dark
-                    ? "Dark mode enabled"
-                    : "Light mode enabled"
-            );
-
-        }
-    );
+.why-card p{
+    font-size:7px;
+    color:#777;
+    margin-top:4px;
+    line-height:1.4;
 }
 
 
 /* =========================================================
-   MOBILE MENU
+   FOOTER
 ========================================================= */
 
-function setupMobileMenu() {
+.footer{
+    background:#090909;
+    color:#fff;
+}
 
-    const button =
-        document.getElementById(
-            "mobileMenuBtn"
-        );
+.footer-inner{
+    width:min(var(--container),calc(100% - 36px));
+    margin:auto;
+    padding:28px 0;
+    display:grid;
+    grid-template-columns:1.6fr repeat(4,1fr);
+    gap:24px;
+}
 
-    const menu =
-        document.getElementById(
-            "mobileMenu"
-        );
+.footer-logo .logo-text{
+    font-size:20px;
+}
 
+.footer-logo .logo-chef{
+    width:23px;
+    height:23px;
+}
 
-    if (!button || !menu) return;
+.footer-logo .logo-chef svg{
+    width:23px;
+    height:23px;
+}
 
+.footer-brand > p{
+    font-size:8px;
+    color:#888;
+    margin-top:7px;
+}
 
-    button.addEventListener(
-        "click",
-        () => {
+.footer-column h4{
+    font-size:9px;
+    margin-bottom:8px;
+}
 
-            const open =
-                menu.classList.toggle(
-                    "open"
-                );
+.footer-column a{
+    display:block;
+    font-size:7px;
+    color:#888;
+    margin:6px 0;
+}
 
-            button.setAttribute(
-                "aria-expanded",
-                String(open)
-            );
+.footer-column a:hover{
+    color:var(--orange);
+}
 
-        }
-    );
+.footer-bottom{
+    width:min(var(--container),calc(100% - 36px));
+    margin:auto;
+    border-top:1px solid #222;
+    padding:12px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
+.footer-bottom p{
+    font-size:7px;
+    color:#777;
+}
 
-    menu
-        .querySelectorAll("a")
-        .forEach(link => {
+.social-links{
+    display:flex;
+    gap:9px;
+}
 
-            link.addEventListener(
-                "click",
-                () => {
+.social-links a{
+    color:#aaa;
+}
 
-                    menu.classList.remove(
-                        "open"
-                    );
-
-                    button.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-            );
-
-        });
+.social-links svg{
+    width:14px;
+    height:14px;
 }
 
 
 /* =========================================================
-   LOCATION
+   MOBILE BOTTOM NAV
 ========================================================= */
 
-function setupLocationButtons() {
-
-    const buttons = [
-        document.getElementById(
-            "locationBtn"
-        ),
-        document.getElementById(
-            "heroLocationBtn"
-        )
-    ].filter(Boolean);
-
-
-    buttons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const location =
-                    prompt(
-                        "Enter your location",
-                        getCurrentLocation()
-                    );
-
-
-                if (
-                    !location ||
-                    !location.trim()
-                ) return;
-
-
-                const cleanLocation =
-                    location.trim();
-
-
-                setLocation(
-                    cleanLocation
-                );
-
-
-                showToast(
-                    `Location changed to ${cleanLocation}`
-                );
-
-            }
-        );
-
-    });
-}
-
-
-function setLocation(location) {
-
-    const currentLocation =
-        document.getElementById(
-            "currentLocation"
-        );
-
-    const heroLocation =
-        document.getElementById(
-            "heroLocation"
-        );
-
-
-    if (currentLocation) {
-
-        currentLocation.textContent =
-            location;
-
-    }
-
-
-    if (heroLocation) {
-
-        heroLocation.textContent =
-            location;
-
-    }
-
-
-    localStorage.setItem(
-        "eatergoLocation",
-        location
-    );
-}
-
-
-function getCurrentLocation() {
-
-    return (
-        localStorage.getItem(
-            "eatergoLocation"
-        ) || "Surat"
-    );
-}
-
-
-function restoreLocation() {
-
-    setLocation(
-        getCurrentLocation()
-    );
-}
-
-
-/* =========================================================
-   HEADER BUTTONS
-========================================================= */
-
-function setupHeaderButtons() {
-
-    const wishlist =
-        document.getElementById(
-            "wishlistBtn"
-        );
-
-    const cartButton =
-        document.getElementById(
-            "cartBtn"
-        );
-
-
-    if (wishlist) {
-
-        wishlist.addEventListener(
-            "click",
-            () => {
-
-                showToast(
-                    favourites.length
-                        ? `${favourites.length} favourite items`
-                        : "No favourite items yet"
-                );
-
-            }
-        );
-
-    }
-
-
-    if (cartButton) {
-
-        cartButton.addEventListener(
-            "click",
-            () => {
-
-                window.location.href =
-                    "cart.html";
-
-            }
-        );
-
-    }
-}
-
-
-/* =========================================================
-   OFFER SLIDER
-========================================================= */
-
-function setupOfferSlider() {
-
-    const grid =
-        document.getElementById(
-            "offerGrid"
-        );
-
-    const previous =
-        document.getElementById(
-            "offerPrev"
-        );
-
-    const next =
-        document.getElementById(
-            "offerNext"
-        );
-
-
-    if (!grid) return;
-
-
-    if (previous) {
-
-        previous.addEventListener(
-            "click",
-            () => {
-
-                grid.scrollBy({
-                    left: -320,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
-
-
-    if (next) {
-
-        next.addEventListener(
-            "click",
-            () => {
-
-                grid.scrollBy({
-                    left: 320,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
+.mobile-bottom-nav{
+    display:none;
 }
 
 
@@ -1794,145 +1240,607 @@ function setupOfferSlider() {
    TOAST
 ========================================================= */
 
-function showToast(message) {
+.toast{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:3000;
+    padding:9px 13px;
+    border-radius:7px;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:9px;
+    transform:translateY(60px);
+    opacity:0;
+    transition:.25s;
+}
 
-    const toast =
-        document.getElementById(
-            "toast"
-        );
+.toast.show{
+    transform:none;
+    opacity:1;
+}
 
-    const toastMessage =
-        document.getElementById(
-            "toastMessage"
-        );
+.toast-icon svg{
+    width:14px;
+    height:14px;
+}
 
+.toast-icon{
+    display:flex;
+}
 
-    if (
-        !toast ||
-        !toastMessage
-    ) return;
-
-
-    toastMessage.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2500
-        );
+.empty-state{
+    grid-column:1/-1;
+    padding:35px;
+    text-align:center;
+    background:#fff;
+    border:1px dashed #ddd;
+    border-radius:8px;
+    color:#777;
+    font-size:11px;
 }
 
 
 /* =========================================================
-   SCROLL
+   TABLET
 ========================================================= */
 
-function scrollToSection(id) {
+@media(max-width:1050px){
 
-    const element =
-        document.getElementById(id);
+    :root{
+        --container:calc(100% - 36px);
+    }
 
-    if (!element) return;
+    .desktop-nav{
+        gap:15px;
+    }
 
+    .header-search{
+        width:210px;
+    }
 
-    const header =
-        document.querySelector(
-            ".site-header, header"
-        );
+    .restaurant-grid,
+    .dish-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
 
+    .restaurant-image,
+    .dish-image{
+        height:130px;
+    }
 
-    const headerHeight =
-        header
-            ? header.offsetHeight
-            : 60;
+    .offer-card{
+        height:110px;
+    }
 
-
-    const position =
-        element.getBoundingClientRect()
-            .top +
-        window.scrollY -
-        headerHeight -
-        12;
-
-
-    window.scrollTo({
-        top: Math.max(0, position),
-        behavior: "smooth"
-    });
+    .offer-content h3{
+        font-size:18px;
+    }
 }
 
 
 /* =========================================================
-   HTML SAFETY
+   TABLET / MOBILE
 ========================================================= */
 
-function escapeHTML(value) {
+@media(max-width:800px){
 
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    .main-header{
+        height:55px;
+    }
+
+    .header-inner{
+        width:calc(100% - 24px);
+    }
+
+    .header-search{
+        flex:1;
+        width:auto;
+    }
+
+    .desktop-nav,
+    .header-actions{
+        display:none;
+    }
+
+    .mobile-menu-button{
+        display:block;
+        margin-left:auto;
+    }
+
+    .mobile-menu{
+        position:fixed;
+        top:55px;
+        left:0;
+        right:0;
+        z-index:999;
+        background:#090909;
+        color:#fff;
+        padding:15px 18px;
+        box-shadow:0 10px 25px rgba(0,0,0,.3);
+    }
+
+    .mobile-menu.open{
+        display:block;
+    }
+
+    .mobile-menu > a{
+        display:block;
+        padding:11px 0;
+        border-bottom:1px solid #282828;
+        font-size:12px;
+    }
+
+    .mobile-menu-buttons{
+        display:flex;
+        gap:8px;
+        margin-top:12px;
+    }
+
+    .mobile-menu-buttons a{
+        flex:1;
+    }
+
+    .hero{
+        height:245px;
+    }
+
+    .hero-inner{
+        width:calc(100% - 24px);
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero-search{
+        width:min(100%,500px);
+    }
+
+    .category-section{
+        height:90px;
+        width:100%;
+        padding:0 12px;
+    }
+
+    .category-container{
+        overflow-x:auto;
+        justify-content:flex-start;
+        scrollbar-width:none;
+    }
+
+    .category-container::-webkit-scrollbar{
+        display:none;
+    }
+
+    .category-card{
+        flex:0 0 72px;
+    }
+
+    .category-section > .slider-next{
+        display:none;
+    }
+
+    .section,
+    .offers-section,
+    .why-inner{
+        width:calc(100% - 24px);
+    }
+
+    .restaurant-grid,
+    .dish-grid{
+        display:flex;
+        overflow-x:auto;
+        gap:10px;
+        scrollbar-width:none;
+        padding-bottom:4px;
+    }
+
+    .restaurant-grid::-webkit-scrollbar,
+    .dish-grid::-webkit-scrollbar{
+        display:none;
+    }
+
+    .restaurant-card,
+    .dish-card{
+        flex:0 0 205px;
+    }
+
+    .restaurant-image,
+    .dish-image{
+        height:125px;
+    }
+
+    .offer-grid{
+        display:flex;
+        overflow-x:auto;
+        gap:10px;
+        scrollbar-width:none;
+    }
+
+    .offer-grid::-webkit-scrollbar{
+        display:none;
+    }
+
+    .offer-card{
+        flex:0 0 300px;
+        height:125px;
+    }
+
+    .offer-content{
+        padding:18px;
+    }
+
+    .offer-content h3{
+        font-size:20px;
+    }
+
+    .collection-grid{
+        display:flex;
+        overflow-x:auto;
+        gap:10px;
+        scrollbar-width:none;
+    }
+
+    .collection-grid::-webkit-scrollbar{
+        display:none;
+    }
+
+    .collection-card{
+        flex:0 0 280px;
+    }
+
+    .why-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-inner{
+        width:calc(100% - 24px);
+        grid-template-columns:1fr 1fr;
+        gap:22px 15px;
+    }
+
+    .footer-brand{
+        grid-column:1/-1;
+    }
+
+    .footer-bottom{
+        width:calc(100% - 24px);
+    }
 }
 
 
 /* =========================================================
-   IMAGE FALLBACK
+   MOBILE
 ========================================================= */
 
-document.addEventListener(
-    "error",
-    event => {
+@media(max-width:600px){
 
-        const image =
-            event.target;
+    body{
+        padding-bottom:64px;
+    }
+
+    .logo-text{
+        font-size:21px;
+    }
+
+    .logo-chef,
+    .logo-chef svg{
+        width:23px;
+        height:23px;
+    }
+
+    .location-selector{
+        display:none;
+    }
+
+    .header-search{
+        height:32px;
+    }
+
+    .header-search input{
+        font-size:9px;
+    }
+
+    .hero{
+        height:275px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero p{
+        font-size:10px;
+    }
+
+    .hero-search{
+        height:auto;
+        min-height:42px;
+        flex-wrap:wrap;
+        border-radius:11px;
+        padding:4px;
+    }
+
+    .hero-location{
+        width:72px;
+        height:32px;
+        font-size:8px;
+    }
+
+    .hero-search-input{
+        height:32px;
+        min-width:120px;
+    }
+
+    .hero-search-input input{
+        font-size:8px;
+    }
+
+    .hero-search-button{
+        height:32px;
+        padding:0 14px;
+        font-size:8px;
+    }
+
+    .category-section{
+        height:92px;
+    }
+
+    .category-image{
+        width:53px;
+        height:53px;
+    }
+
+    .category-card{
+        flex-basis:68px;
+    }
+
+    .category-name{
+        font-size:8px;
+    }
+
+    .section-header{
+        height:43px;
+    }
+
+    .section-header h2{
+        font-size:12px;
+    }
+
+    .view-all{
+        font-size:8px;
+    }
+
+    .restaurant-card,
+    .dish-card{
+        flex-basis:205px;
+    }
+
+    .restaurant-image,
+    .dish-image{
+        height:125px;
+    }
+
+    .offer-card{
+        flex-basis:300px;
+    }
+
+    .collection-card{
+        flex-basis:280px;
+        height:145px;
+    }
+
+    .why-section{
+        padding:24px 0;
+    }
+
+    .why-grid{
+        gap:9px;
+    }
+
+    .why-card{
+        padding:12px 8px;
+    }
+
+    .why-card h3{
+        font-size:9px;
+    }
+
+    .why-card p{
+        font-size:7px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-bottom{
+        gap:10px;
+    }
+
+    .social-links{
+        gap:7px;
+    }
+
+    .mobile-bottom-nav{
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        height:64px;
+        z-index:2000;
+        display:flex;
+        background:rgba(255,255,255,.98);
+        border-top:1px solid #ddd;
+        box-shadow:0 -5px 18px rgba(0,0,0,.08);
+    }
+
+    .bottom-nav-item{
+        position:relative;
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:4px;
+        color:#777;
+        font-size:8px;
+        font-weight:700;
+    }
+
+    .bottom-nav-item svg{
+        width:18px;
+        height:18px;
+    }
+
+    .bottom-nav-item.active{
+        color:var(--orange);
+    }
+
+    .bottom-cart-icon{
+        position:relative;
+        display:flex;
+    }
+
+    .bottom-cart-count{
+        top:-5px;
+        right:-7px;
+    }
+
+    .toast{
+        left:12px;
+        right:12px;
+        bottom:75px;
+        justify-content:center;
+    }
+}
 
 
-        if (
-            image &&
-            image.tagName === "IMG"
-        ) {
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-            image.classList.add(
-                "image-error"
-            );
+@media(max-width:380px){
 
-        }
+    .hero h1{
+        font-size:28px;
+    }
 
-    },
-    true
-);
+    .restaurant-card,
+    .dish-card{
+        flex-basis:185px;
+    }
+
+    .offer-card{
+        flex-basis:270px;
+    }
+
+    .collection-card{
+        flex-basis:260px;
+    }
+
+    .logo-text{
+        font-size:19px;
+    }
+}
+
+
+/* =========================================================
+   DARK MODE
+   Matches scripts.js -> dark-mode
+========================================================= */
+
+body.dark-mode{
+    --bg:#111;
+    --text:#f3f3f3;
+    background:#111;
+    color:#f3f3f3;
+}
+
+.dark-mode .main-content{
+    background:#111;
+}
+
+.dark-mode .category-section{
+    background:#111;
+}
+
+.dark-mode .category-name,
+.dark-mode .section-header h2{
+    color:#eee;
+}
+
+.dark-mode .restaurant-card,
+.dark-mode .dish-card,
+.dark-mode .why-card{
+    background:#181818;
+    border-color:#292929;
+}
+
+.dark-mode .restaurant-name,
+.dark-mode .dish-name{
+    color:#eee;
+}
+
+.dark-mode .restaurant-cuisine,
+.dark-mode .restaurant-price,
+.dark-mode .dish-restaurant,
+.dark-mode .restaurant-rating span:last-child{
+    color:#999;
+}
+
+.dark-mode .category-section{
+    border-color:#292929;
+}
+
+.dark-mode .arrows button,
+.dark-mode .category-section > .slider-next{
+    background:#181818;
+    border-color:#333;
+    color:#fff;
+}
+
+.dark-mode .why-section{
+    background:#151515;
+}
+
+.dark-mode .footer{
+    background:#080808;
+}
+
+.dark-mode .mobile-bottom-nav{
+    background:#151515;
+    border-color:#292929;
+}
+
+.dark-mode .bottom-nav-item{
+    color:#aaa;
+}
+
+.dark-mode .bottom-nav-item.active{
+    color:var(--orange);
+}
+
+.dark-mode .empty-state{
+    background:#181818;
+    border-color:#333;
+    color:#aaa;
+}
+
+
+/* =========================================================
+   IMAGE ERROR
+========================================================= */
+
+.image-error{
+    opacity:.35;
+    object-fit:cover;
+}
