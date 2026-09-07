@@ -2,175 +2,290 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Eatergo - Discover, Order and Enjoy your favourite food.">
 
     <title>Eatergo | Discover. Order. Enjoy.</title>
 
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-<header class="header">
+<header class="main-header">
 
-    <div class="container navbar">
+    <div class="header-inner">
 
-        <a href="#" class="logo">
-            <span class="logo-box">E</span>
-            eatergo
-        </a>
-
-        <button class="location-btn" id="locationBtn">
-            <span class="location-icon">⌖</span>
-
-            <span class="location-info">
-                <small>Deliver to</small>
-                <strong>New Delhi, India</strong>
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <span class="logo-chef">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 9V6.5C7 4.57 8.57 3 10.5 3c.93 0 1.77.36 2.39.95A3.48 3.48 0 0 1 15.5 3C17.43 3 19 4.57 19 6.5V9"/>
+                    <path d="M6 9h13v4c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V9Z"/>
+                    <path d="M8 15v5M16 15v5"/>
+                </svg>
             </span>
 
-            <span class="arrow">⌄</span>
+            <span class="logo-text">
+                Eater<span>go</span>
+            </span>
+        </a>
+
+
+        <!-- Location -->
+        <button class="location-selector" id="locationBtn">
+
+            <span class="location-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
+                    <circle cx="12" cy="9" r="2.2"/>
+                </svg>
+            </span>
+
+            <span id="currentLocation">Surat</span>
+
+            <svg class="chevron-icon" viewBox="0 0 24 24">
+                <path d="m7 10 5 5 5-5"/>
+            </svg>
+
         </button>
 
 
         <!-- Desktop Search -->
+        <div class="header-search">
 
-        <div class="navbar-search">
-
-            <span>⌕</span>
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="m16.5 16.5 4 4"/>
+            </svg>
 
             <input
                 type="text"
-                id="searchInput"
+                id="headerSearch"
                 placeholder="Search restaurants, dishes or cuisines..."
+                autocomplete="off"
             >
 
         </div>
 
 
-        <!-- Desktop Menu -->
+        <!-- Navigation -->
+        <nav class="desktop-nav">
 
-        <nav class="desktop-menu">
+            <a href="index.html" class="nav-link active">
+                Home
+            </a>
 
-            <a href="#restaurants">Restaurants</a>
-            <a href="#offers">Offers</a>
-            <a href="#collections">Collections</a>
+            <a href="restaurants.html" class="nav-link">
+                Restaurants
+            </a>
+
+            <a href="#offers" class="nav-link">
+                Offers
+            </a>
+
+            <a href="#collections" class="nav-link">
+                Collections
+            </a>
 
         </nav>
 
 
-        <!-- Actions -->
+        <!-- Header Actions -->
+        <div class="header-actions">
 
-        <div class="nav-actions">
-
+            <!-- Theme -->
             <button
-                class="nav-icon"
+                class="icon-button theme-button"
                 id="themeBtn"
-                title="Dark mode"
+                aria-label="Toggle theme"
             >
-                ☾
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
+                </svg>
+
+                <svg class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M21 14.8A8.5 8.5 0 0 1 9.2 3a8.5 8.5 0 1 0 11.8 11.8Z"/>
+                </svg>
             </button>
 
+
+            <!-- Wishlist -->
             <button
-                class="nav-icon"
-                id="favBtn"
-                title="Favourites"
+                class="icon-button"
+                id="wishlistBtn"
+                aria-label="Wishlist"
             >
-                ♡
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
+                </svg>
             </button>
 
+
+            <!-- Cart -->
             <button
-                class="cart-button"
+                class="icon-button cart-button"
                 id="cartBtn"
+                aria-label="Shopping cart"
             >
-                🛒
-                <span id="cartCount">0</span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
+                    <circle cx="9" cy="20" r="1"/>
+                    <circle cx="18" cy="20" r="1"/>
+                </svg>
+
+                <span class="cart-count" id="cartCount">0</span>
             </button>
 
-            <a href="#" class="login-btn">
-                Log in
+
+            <!-- Login -->
+            <a href="login.html" class="login-button">
+                Login
             </a>
 
-            <a href="#" class="signup-btn">
-                Sign up
+
+            <!-- Signup -->
+            <a href="signup.html" class="signup-button">
+                Sign Up
             </a>
 
         </div>
 
 
-        <!-- Mobile Menu Button -->
-
+        <!-- Mobile Menu -->
         <button
-            class="mobile-menu-btn"
-            id="menuBtn"
+            class="mobile-menu-button"
+            id="mobileMenuBtn"
+            aria-label="Open menu"
         >
-            ☰
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
-
-    </div>
-
-
-    <!-- Mobile Navigation -->
-
-    <div class="mobile-menu" id="mobileMenu">
-
-        <a href="#restaurants">Restaurants</a>
-        <a href="#offers">Offers</a>
-        <a href="#collections">Collections</a>
-        <a href="#">Log in</a>
-        <a href="#">Sign up</a>
 
     </div>
 
 </header>
 
 
+<!-- =========================================================
+     MOBILE MENU
+========================================================= -->
 
-<!-- ================= HERO ================= -->
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+    <a href="restaurants.html">Restaurants</a>
+    <a href="#offers">Offers</a>
+    <a href="#collections">Collections</a>
+
+    <div class="mobile-menu-buttons">
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
 
 <section class="hero">
 
     <div class="hero-overlay"></div>
 
-    <div class="container hero-content">
+    <div class="hero-inner">
 
-        <span class="hero-label">
-            GOOD FOOD. GOOD MOOD.
-        </span>
+        <div class="hero-content">
 
-        <h1>
-            Discover your next
-            <span>favourite meal.</span>
-        </h1>
-
-        <p>
-            Explore the best restaurants and delicious dishes around you.
-        </p>
+            <div class="hero-eyebrow">
+                GOOD FOOD
+                <span>•</span>
+                GREAT MOOD
+            </div>
 
 
-        <div class="hero-search">
+            <h1>
+                Discover.
+                Order.
+                <span>Enjoy.</span>
+            </h1>
 
-            <span>⌕</span>
 
-            <input
-                type="text"
-                id="heroSearch"
-                placeholder="Search for dishes, restaurants or cuisines"
-            >
+            <p>
+                Find the best food around you with Eatergo.
+            </p>
 
-            <button id="searchBtn">
-                Search
-            </button>
+
+            <!-- Hero Search -->
+            <div class="hero-search">
+
+                <!-- Location -->
+                <button class="hero-location" id="heroLocationBtn">
+
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.2"/>
+                    </svg>
+
+                    <span id="heroLocation">
+                        Surat
+                    </span>
+
+                    <svg class="hero-chevron" viewBox="0 0 24 24">
+                        <path d="m7 10 5 5 5-5"/>
+                    </svg>
+
+                </button>
+
+
+                <div class="hero-divider"></div>
+
+
+                <!-- Search Input -->
+                <div class="hero-search-input">
+
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="7"/>
+                        <path d="m16.5 16.5 4 4"/>
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="heroSearch"
+                        placeholder="Search restaurants, dishes or cuisines..."
+                    >
+
+                </div>
+
+
+                <button
+                    class="hero-search-button"
+                    id="heroSearchBtn"
+                >
+                    Search
+                </button>
+
+            </div>
 
         </div>
 
@@ -179,145 +294,167 @@
 </section>
 
 
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-<!-- ================= CATEGORIES ================= -->
+<main class="main-content">
 
-<section class="section categories-section">
 
-    <div class="container">
+    <!-- =====================================================
+         FOOD CATEGORIES
+    ====================================================== -->
 
-        <div class="section-header">
-
-            <div>
-
-                <span class="section-label">
-                    EXPLORE
-                </span>
-
-                <h2>
-                    What are you craving?
-                </h2>
-
-            </div>
-
-        </div>
-
+    <section class="section category-section">
 
         <div
             class="category-container"
             id="categoryContainer"
-        ></div>
+        >
+            <!-- JavaScript will load categories -->
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =====================================================
+         TOP RESTAURANTS
+    ====================================================== -->
 
-<!-- ================= RESTAURANTS ================= -->
-
-<section
-    class="section"
-    id="restaurants"
->
-
-    <div class="container">
+    <section class="section restaurant-section">
 
         <div class="section-header">
 
-            <div>
+            <div class="section-title-wrap">
 
-                <span class="section-label">
-                    NEAR YOU
+                <span class="section-title-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.2"/>
+                    </svg>
                 </span>
 
                 <h2>
-                    Top restaurants near you
+                    Top Restaurants Near You
                 </h2>
 
             </div>
 
-            <a href="#" class="view-all">
-                View all →
+
+            <a
+                href="restaurants.html"
+                class="view-all"
+            >
+                View All
+                <svg viewBox="0 0 24 24">
+                    <path d="m9 5 7 7-7 7"/>
+                </svg>
             </a>
 
         </div>
 
 
+        <!-- Restaurant Cards -->
         <div
             class="restaurant-grid"
             id="restaurantGrid"
-        ></div>
+        >
+            <!-- JavaScript -->
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =====================================================
+         OFFERS
+    ====================================================== -->
 
-<!-- ================= OFFERS ================= -->
+    <section
+        class="section offers-section"
+        id="offers"
+    >
 
-<section
-    class="section offers-section"
-    id="offers"
->
+        <div class="offer-slider">
 
-    <div class="container">
+            <button
+                class="slider-arrow slider-prev"
+                id="offerPrev"
+                aria-label="Previous offers"
+            >
+                <svg viewBox="0 0 24 24">
+                    <path d="m15 5-7 7 7 7"/>
+                </svg>
+            </button>
 
-        <div class="section-header">
 
-            <div>
-
-                <span class="section-label">
-                    DEALS FOR YOU
-                </span>
-
-                <h2>
-                    Grab today's offers
-                </h2>
-
+            <div
+                class="offer-grid"
+                id="offerGrid"
+            >
+                <!-- JavaScript -->
             </div>
 
-            <a href="#" class="view-all">
-                View all →
-            </a>
+
+            <button
+                class="slider-arrow slider-next"
+                id="offerNext"
+                aria-label="Next offers"
+            >
+                <svg viewBox="0 0 24 24">
+                    <path d="m9 5 7 7-7 7"/>
+                </svg>
+            </button>
 
         </div>
 
 
         <div
-            class="offer-grid"
-            id="offerGrid"
-        ></div>
+            class="slider-dots"
+            id="offerDots"
+        >
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =====================================================
+         POPULAR DISHES
+    ====================================================== -->
 
-<!-- ================= POPULAR DISHES ================= -->
-
-<section class="section">
-
-    <div class="container">
+    <section class="section dishes-section">
 
         <div class="section-header">
 
-            <div>
+            <div class="section-title-wrap">
 
-                <span class="section-label">
-                    POPULAR NOW
+                <span class="section-title-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 3v7a3 3 0 0 0 6 0V3"/>
+                        <path d="M9 3v18"/>
+                        <path d="M16 3v18"/>
+                        <path d="M16 3c3 1 4 3 4 6s-1 4-4 4"/>
+                    </svg>
                 </span>
 
                 <h2>
-                    Popular dishes
+                    Popular Dishes
                 </h2>
 
             </div>
 
-            <a href="#" class="view-all">
-                View all →
+
+            <a
+                href="restaurants.html"
+                class="view-all"
+            >
+                View All
+                <svg viewBox="0 0 24 24">
+                    <path d="m9 5 7 7-7 7"/>
+                </svg>
             </a>
 
         </div>
@@ -326,33 +463,28 @@
         <div
             class="dish-grid"
             id="dishGrid"
-        ></div>
+        >
+            <!-- JavaScript -->
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =====================================================
+         COLLECTIONS
+    ====================================================== -->
 
-<!-- ================= COLLECTIONS ================= -->
-
-<section
-    class="section"
-    id="collections"
->
-
-    <div class="container">
+    <section
+        class="section collections-section"
+        id="collections"
+    >
 
         <div class="section-header">
 
-            <div>
-
-                <span class="section-label">
-                    CURATED FOR YOU
-                </span>
+            <div class="section-title-wrap">
 
                 <h2>
-                    Eatergo collections
+                    Explore Collections
                 </h2>
 
             </div>
@@ -363,26 +495,159 @@
         <div
             class="collection-grid"
             id="collectionGrid"
-        ></div>
+        >
+            <!-- JavaScript -->
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =====================================================
+         WHY EATERGO
+    ====================================================== -->
 
-<!-- ================= FOOTER ================= -->
+    <section class="why-section">
+
+        <div class="why-inner">
+
+            <div class="why-heading">
+
+                <span class="small-label">
+                    WHY EATERGO
+                </span>
+
+                <h2>
+                    Your food,
+                    <span>your way.</span>
+                </h2>
+
+                <p>
+                    Everything you need to discover great food,
+                    order easily and enjoy every bite.
+                </p>
+
+            </div>
+
+
+            <div class="why-grid">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="7"/>
+                            <path d="m16.5 16.5 4 4"/>
+                        </svg>
+                    </div>
+
+                    <h3>
+                        Smart Food Finder
+                    </h3>
+
+                    <p>
+                        Search restaurants, dishes and cuisines
+                        in seconds.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
+                            <circle cx="12" cy="9" r="2"/>
+                        </svg>
+                    </div>
+
+                    <h3>
+                        Nearby Restaurants
+                    </h3>
+
+                    <p>
+                        Discover highly rated restaurants
+                        around your location.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
+                            <path d="M20 4v6h-6"/>
+                        </svg>
+                    </div>
+
+                    <h3>
+                        Easy Ordering
+                    </h3>
+
+                    <p>
+                        Simple ordering with transparent
+                        prices and delivery information.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3 14.8 9l6.2.7-4.6 4.2 1.3 6.1L12 17l-5.7 3 1.3-6.1L3 9.7 9.2 9 12 3Z"/>
+                        </svg>
+                    </div>
+
+                    <h3>
+                        Trusted Reviews
+                    </h3>
+
+                    <p>
+                        Make better food decisions using
+                        genuine ratings and reviews.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer class="footer">
 
-    <div class="container footer-content">
+    <div class="footer-inner">
 
         <div class="footer-brand">
 
-            <a href="#" class="logo">
-                <span class="logo-box">E</span>
-                eatergo
+            <a href="index.html" class="logo footer-logo">
+
+                <span class="logo-chef">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 9V6.5C7 4.57 8.57 3 10.5 3c.93 0 1.77.36 2.39.95A3.48 3.48 0 0 1 15.5 3C17.43 3 19 4.57 19 6.5V9"/>
+                        <path d="M6 9h13v4c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V9Z"/>
+                        <path d="M8 15v5M16 15v5"/>
+                    </svg>
+                </span>
+
+                <span class="logo-text">
+                    Eater<span>go</span>
+                </span>
+
             </a>
+
 
             <p>
                 Discover. Order. Enjoy.
@@ -391,68 +656,243 @@
         </div>
 
 
-        <div class="footer-links">
+        <div class="footer-column">
 
-            <a href="#">About</a>
-            <a href="#">Careers</a>
-            <a href="#">Help</a>
-            <a href="#">Terms</a>
-            <a href="#">Privacy</a>
+            <h4>
+                Company
+            </h4>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Careers
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
 
         </div>
 
 
-        <p class="copyright">
+        <div class="footer-column">
+
+            <h4>
+                For Customers
+            </h4>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="#">
+                Offers
+            </a>
+
+            <a href="#">
+                Help & Support
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                For Partners
+            </h4>
+
+            <a href="#">
+                Partner With Us
+            </a>
+
+            <a href="#">
+                Delivery Partner
+            </a>
+
+            <a href="#">
+                Restaurant Login
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Cookie Policy
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
             © 2026 Eatergo. All rights reserved.
         </p>
+
+        <div class="social-links">
+
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="1"/>
+                </svg>
+            </a>
+
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z"/>
+                </svg>
+            </a>
+
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24">
+                    <path d="m4 4 6.2 7.3L4.4 20H7l4.4-5.2L15.8 20H20l-6.5-7.7L19.6 4H17l-4 4.7L8.2 4H4Z"/>
+                </svg>
+            </a>
+
+        </div>
 
     </div>
 
 </footer>
 
 
+<!-- =========================================================
+     MOBILE BOTTOM NAVIGATION
+========================================================= -->
 
-<!-- ================= MOBILE BOTTOM NAV ================= -->
+<nav class="mobile-bottom-nav">
 
-<nav class="bottom-navigation">
+    <a href="index.html" class="bottom-nav-item active">
 
-    <a href="#" class="active">
-        <span>⌂</span>
-        Home
+        <svg viewBox="0 0 24 24">
+            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/>
+            <path d="M9 21v-6h6v6"/>
+        </svg>
+
+        <span>
+            Home
+        </span>
+
     </a>
 
-    <a href="#restaurants">
-        <span>♧</span>
-        Explore
+
+    <a href="restaurants.html" class="bottom-nav-item">
+
+        <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m16.5 16.5 4 4"/>
+        </svg>
+
+        <span>
+            Search
+        </span>
+
     </a>
 
-    <a href="#offers">
-        <span>％</span>
-        Offers
+
+    <a href="#offers" class="bottom-nav-item">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
+            <path d="M20 4v6h-6"/>
+        </svg>
+
+        <span>
+            Offers
+        </span>
+
     </a>
 
-    <a href="#">
-        <span>♡</span>
-        Favourites
+
+    <a href="#" class="bottom-nav-item">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
+        </svg>
+
+        <span>
+            Favourites
+        </span>
+
     </a>
 
-    <a href="#">
-        <span>☻</span>
-        Profile
+
+    <a href="cart.html" class="bottom-nav-item bottom-cart">
+
+        <span class="bottom-cart-icon">
+
+            <svg viewBox="0 0 24 24">
+                <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
+                <circle cx="9" cy="20" r="1"/>
+                <circle cx="18" cy="20" r="1"/>
+            </svg>
+
+            <span
+                class="cart-count bottom-cart-count"
+                id="mobileCartCount"
+            >
+                0
+            </span>
+
+        </span>
+
+        <span>
+            Cart
+        </span>
+
     </a>
 
 </nav>
 
 
-
-<!-- ================= TOAST ================= -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
 <div
     class="toast"
     id="toast"
-></div>
+    role="alert"
+>
+    <span class="toast-icon">
+
+        <svg viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6"/>
+        </svg>
+
+    </span>
+
+    <span id="toastMessage">
+        Added to cart
+    </span>
+
+</div>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
