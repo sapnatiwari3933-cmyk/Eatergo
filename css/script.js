@@ -1,7 +1,9 @@
 /* =========================================================
    EATERGO - MAIN JAVASCRIPT
+   Responsive / Vanilla JS
 ========================================================= */
 
+"use strict";
 
 /* =========================================================
    DATA
@@ -46,7 +48,6 @@ const categories = [
     }
 ];
 
-
 const restaurants = [
     {
         id: 1,
@@ -62,7 +63,6 @@ const restaurants = [
         category: ["Indian", "Chinese"],
         image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=85"
     },
-
     {
         id: 2,
         name: "La Pino's Pizza",
@@ -77,7 +77,6 @@ const restaurants = [
         category: ["Pizza"],
         image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=700&q=85"
     },
-
     {
         id: 3,
         name: "Burger Singh",
@@ -92,7 +91,6 @@ const restaurants = [
         category: ["Burgers"],
         image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85"
     },
-
     {
         id: 4,
         name: "Biryani Blues",
@@ -107,7 +105,6 @@ const restaurants = [
         category: ["Biryani", "Indian"],
         image: "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=700&q=85"
     },
-
     {
         id: 5,
         name: "Wok This Way",
@@ -122,7 +119,6 @@ const restaurants = [
         category: ["Chinese"],
         image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=700&q=85"
     },
-
     {
         id: 6,
         name: "Green Bowl Cafe",
@@ -139,7 +135,6 @@ const restaurants = [
     }
 ];
 
-
 const offers = [
     {
         title: "Up to 50% OFF",
@@ -148,7 +143,6 @@ const offers = [
         className: "",
         image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85"
     },
-
     {
         title: "Flat ₹125 OFF",
         subtitle: "Use code EATER125",
@@ -156,7 +150,6 @@ const offers = [
         className: "light-offer",
         image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
     },
-
     {
         title: "Free Delivery",
         subtitle: "On selected restaurants",
@@ -165,7 +158,6 @@ const offers = [
         image: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=900&q=85"
     }
 ];
-
 
 const dishes = [
     {
@@ -176,7 +168,6 @@ const dishes = [
         price: 289,
         image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=85"
     },
-
     {
         id: 102,
         name: "Margherita Pizza",
@@ -185,7 +176,6 @@ const dishes = [
         price: 249,
         image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=85"
     },
-
     {
         id: 103,
         name: "Chicken Burger",
@@ -194,7 +184,6 @@ const dishes = [
         price: 199,
         image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=85"
     },
-
     {
         id: 104,
         name: "Hyderabadi Biryani",
@@ -203,7 +192,6 @@ const dishes = [
         price: 319,
         image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=85"
     },
-
     {
         id: 105,
         name: "Veg Hakka Noodles",
@@ -212,7 +200,6 @@ const dishes = [
         price: 229,
         image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=85"
     },
-
     {
         id: 106,
         name: "Avocado Power Bowl",
@@ -223,20 +210,17 @@ const dishes = [
     }
 ];
 
-
 const collections = [
     {
         title: "Best of Indian",
         description: "Rich flavours & authentic recipes",
         image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
     },
-
     {
         title: "Late Night Cravings",
         description: "Food that hits different at night",
         image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=85"
     },
-
     {
         title: "Healthy & Fresh",
         description: "Fresh food for a better you",
@@ -251,13 +235,14 @@ const collections = [
 
 let selectedCategory = "All";
 
-let cart = JSON.parse(
-    localStorage.getItem("eatergoCart")
-) || [];
+let cart = getStorage("eatergoCart", []);
 
-let favourites = JSON.parse(
-    localStorage.getItem("eatergoFavourites")
-) || [];
+let favourites = getStorage(
+    "eatergoFavourites",
+    []
+);
+
+let toastTimer = null;
 
 
 /* =========================================================
@@ -267,30 +252,68 @@ let favourites = JSON.parse(
 document.addEventListener("DOMContentLoaded", () => {
 
     renderCategories();
-
     renderRestaurants();
-
     renderOffers();
-
     renderDishes();
-
     renderCollections();
 
-    updateCartCount();
-
     setupSearch();
-
     setupTheme();
-
     setupMobileMenu();
-
     setupLocationButtons();
-
     setupHeaderButtons();
-
     setupOfferSlider();
 
+    updateCartCount();
+    restoreLocation();
+
 });
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function getStorage(key, fallback) {
+
+    try {
+
+        const value =
+            localStorage.getItem(key);
+
+        return value
+            ? JSON.parse(value)
+            : fallback;
+
+    } catch (error) {
+
+        console.warn(
+            `Could not read ${key}`,
+            error
+        );
+
+        return fallback;
+    }
+}
+
+
+function saveStorage(key, value) {
+
+    try {
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(value)
+        );
+
+    } catch (error) {
+
+        console.warn(
+            `Could not save ${key}`,
+            error
+        );
+    }
+}
 
 
 /* =========================================================
@@ -300,64 +323,71 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderCategories() {
 
     const container =
-        document.getElementById("categoryContainer");
+        document.getElementById(
+            "categoryContainer"
+        );
 
     if (!container) return;
 
+    container.innerHTML =
+        categories.map(category => {
 
-    container.innerHTML = categories.map(category => {
+            const active =
+                category.name ===
+                selectedCategory
+                    ? "active"
+                    : "";
 
-        const active =
-            category.name === selectedCategory
-                ? "active"
-                : "";
+            return `
+                <button
+                    type="button"
+                    class="category-card ${active}"
+                    data-category="${escapeHTML(category.name)}"
+                >
 
+                    <div class="category-image">
 
-        return `
-            <button
-                class="category-card ${active}"
-                data-category="${category.name}"
-                type="button"
-            >
+                        <img
+                            src="${category.image}"
+                            alt="${escapeHTML(category.name)}"
+                            loading="lazy"
+                        >
 
-                <div class="category-image">
+                    </div>
 
-                    <img
-                        src="${category.image}"
-                        alt="${category.name}"
-                        loading="lazy"
-                    >
+                    <span class="category-name">
+                        ${escapeHTML(category.name)}
+                    </span>
 
-                </div>
+                </button>
+            `;
 
-                <span class="category-name">
-                    ${category.name}
-                </span>
-
-            </button>
-        `;
-
-    }).join("");
+        }).join("");
 
 
     container
-        .querySelectorAll(".category-card")
+        .querySelectorAll(
+            ".category-card"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                selectedCategory =
-                    button.dataset.category;
+                    selectedCategory =
+                        button.dataset.category;
 
-                renderCategories();
+                    renderCategories();
+                    renderRestaurants();
+                    renderDishes();
 
-                renderRestaurants();
+                    scrollToSection(
+                        "restaurantGrid"
+                    );
 
-                renderDishes();
-
-                scrollToSection("restaurantGrid");
-
-            });
+                }
+            );
 
         });
 }
@@ -367,34 +397,45 @@ function renderCategories() {
    RESTAURANTS
 ========================================================= */
 
-function renderRestaurants() {
+function renderRestaurants(
+    restaurantList = null
+) {
 
     const grid =
-        document.getElementById("restaurantGrid");
+        document.getElementById(
+            "restaurantGrid"
+        );
 
     if (!grid) return;
 
 
-    let filteredRestaurants;
+    let list;
 
 
-    if (selectedCategory === "All") {
+    if (restaurantList) {
 
-        filteredRestaurants = restaurants;
+        list = restaurantList;
+
+    } else if (
+        selectedCategory === "All"
+    ) {
+
+        list = restaurants;
 
     } else {
 
-        filteredRestaurants =
-            restaurants.filter(restaurant =>
-                restaurant.category.includes(
-                    selectedCategory
-                )
+        list =
+            restaurants.filter(
+                restaurant =>
+                    restaurant.category.includes(
+                        selectedCategory
+                    )
             );
 
     }
 
 
-    if (filteredRestaurants.length === 0) {
+    if (!list.length) {
 
         grid.innerHTML = `
             <div class="empty-state">
@@ -407,9 +448,8 @@ function renderRestaurants() {
 
 
     grid.innerHTML =
-        filteredRestaurants.map(
-            restaurant => createRestaurantCard(restaurant)
-        ).join("");
+        list.map(createRestaurantCard)
+            .join("");
 
 
     setupFavouriteButtons();
@@ -420,11 +460,14 @@ function renderRestaurants() {
    RESTAURANT CARD
 ========================================================= */
 
-function createRestaurantCard(restaurant) {
+function createRestaurantCard(
+    restaurant
+) {
 
-    const isFavourite =
-        favourites.includes(restaurant.id);
-
+    const favourite =
+        favourites.includes(
+            restaurant.id
+        );
 
     return `
         <article
@@ -436,29 +479,27 @@ function createRestaurantCard(restaurant) {
 
                 <img
                     src="${restaurant.image}"
-                    alt="${restaurant.name}"
+                    alt="${escapeHTML(restaurant.name)}"
                     loading="lazy"
                 >
 
-
                 <span class="restaurant-badge">
-                    ${restaurant.badge}
+                    ${escapeHTML(restaurant.badge)}
                 </span>
 
-
                 <button
-                    class="restaurant-favourite ${isFavourite ? "active" : ""}"
-                    data-favourite="${restaurant.id}"
-                    aria-label="Add to favourites"
                     type="button"
+                    class="restaurant-favourite ${
+                        favourite ? "active" : ""
+                    }"
+                    data-favourite="${restaurant.id}"
+                    aria-label="${
+                        favourite
+                            ? "Remove from favourites"
+                            : "Add to favourites"
+                    }"
                 >
-
-                    <svg viewBox="0 0 24 24">
-
-                        <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
-
-                    </svg>
-
+                    <span class="heart-icon"></span>
                 </button>
 
             </div>
@@ -467,7 +508,7 @@ function createRestaurantCard(restaurant) {
             <div class="restaurant-info">
 
                 <h3 class="restaurant-name">
-                    ${restaurant.name}
+                    ${escapeHTML(restaurant.name)}
                 </h3>
 
 
@@ -487,12 +528,12 @@ function createRestaurantCard(restaurant) {
 
 
                 <div class="restaurant-cuisine">
-                    ${restaurant.cuisine}
+                    ${escapeHTML(restaurant.cuisine)}
                 </div>
 
 
                 <div class="restaurant-price">
-                    ${restaurant.price}
+                    ${escapeHTML(restaurant.price)}
                 </div>
 
 
@@ -500,18 +541,19 @@ function createRestaurantCard(restaurant) {
 
                     <span class="restaurant-delivery">
 
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="8"/>
-                            <path d="M12 7v5l3 2"/>
-                        </svg>
+                        <span class="clock-icon"></span>
 
-                        ${restaurant.delivery}
+                        ${escapeHTML(
+                            restaurant.delivery
+                        )}
 
                     </span>
 
 
                     <span class="restaurant-offer">
-                        ${restaurant.offer}
+                        ${escapeHTML(
+                            restaurant.offer
+                        )}
                     </span>
 
                 </div>
@@ -530,49 +572,73 @@ function createRestaurantCard(restaurant) {
 function setupFavouriteButtons() {
 
     document
-        .querySelectorAll("[data-favourite]")
+        .querySelectorAll(
+            "[data-favourite]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", event => {
+            button.addEventListener(
+                "click",
+                event => {
 
-                event.stopPropagation();
+                    event.stopPropagation();
 
-
-                const id =
-                    Number(button.dataset.favourite);
-
-
-                if (favourites.includes(id)) {
-
-                    favourites =
-                        favourites.filter(
-                            item => item !== id
+                    const id =
+                        Number(
+                            button.dataset.favourite
                         );
 
-                    button.classList.remove("active");
 
-                    showToast(
-                        "Removed from favourites"
+                    if (
+                        favourites.includes(id)
+                    ) {
+
+                        favourites =
+                            favourites.filter(
+                                item =>
+                                    item !== id
+                            );
+
+                        button.classList.remove(
+                            "active"
+                        );
+
+                        button.setAttribute(
+                            "aria-label",
+                            "Add to favourites"
+                        );
+
+                        showToast(
+                            "Removed from favourites"
+                        );
+
+                    } else {
+
+                        favourites.push(id);
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                        button.setAttribute(
+                            "aria-label",
+                            "Remove from favourites"
+                        );
+
+                        showToast(
+                            "Added to favourites"
+                        );
+
+                    }
+
+
+                    saveStorage(
+                        "eatergoFavourites",
+                        favourites
                     );
 
-                } else {
-
-                    favourites.push(id);
-
-                    button.classList.add("active");
-
-                    showToast(
-                        "Added to favourites"
-                    );
                 }
-
-
-                localStorage.setItem(
-                    "eatergoFavourites",
-                    JSON.stringify(favourites)
-                );
-
-            });
+            );
 
         });
 }
@@ -585,83 +651,108 @@ function setupFavouriteButtons() {
 function renderOffers() {
 
     const grid =
-        document.getElementById("offerGrid");
+        document.getElementById(
+            "offerGrid"
+        );
 
     if (!grid) return;
 
 
     grid.innerHTML =
-        offers.map((offer, index) => {
+        offers.map(
+            (offer, index) => {
 
-            return `
-                <article
-                    class="offer-card ${offer.className}"
-                >
-
-                    <img
-                        src="${offer.image}"
-                        alt="${offer.title}"
-                        loading="lazy"
+                return `
+                    <article
+                        class="offer-card ${
+                            offer.className
+                        }"
                     >
 
-
-                    <div class="offer-content">
-
-                        <h3 class="offer-title">
-                            ${offer.title}
-                        </h3>
-
-                        <p class="offer-subtitle">
-                            ${offer.subtitle}
-                        </p>
-
-                        <button
-                            class="offer-button"
-                            type="button"
-                            data-offer="${index}"
+                        <img
+                            src="${offer.image}"
+                            alt="${escapeHTML(
+                                offer.title
+                            )}"
+                            loading="lazy"
                         >
-                            ${offer.button}
-                        </button>
 
-                    </div>
+                        <div class="offer-content">
 
-                </article>
-            `;
+                            <h3 class="offer-title">
+                                ${escapeHTML(
+                                    offer.title
+                                )}
+                            </h3>
 
-        }).join("");
+                            <p class="offer-subtitle">
+                                ${escapeHTML(
+                                    offer.subtitle
+                                )}
+                            </p>
+
+                            <button
+                                type="button"
+                                class="offer-button"
+                                data-offer="${index}"
+                            >
+                                ${escapeHTML(
+                                    offer.button
+                                )}
+                            </button>
+
+                        </div>
+
+                    </article>
+                `;
+
+            }
+        ).join("");
 
 
-    document
-        .querySelectorAll("[data-offer]")
+    grid
+        .querySelectorAll(
+            "[data-offer]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                const index =
-                    Number(button.dataset.offer);
+                    const index =
+                        Number(
+                            button.dataset.offer
+                        );
 
-                const offer = offers[index];
+                    const offer =
+                        offers[index];
 
-                if (offer.button === "COPY CODE") {
 
-                    copyCoupon();
+                    if (
+                        offer.button ===
+                        "COPY CODE"
+                    ) {
 
-                } else {
+                        copyCoupon();
 
-                    showToast(
-                        "Opening offer..."
-                    );
+                    } else {
+
+                        showToast(
+                            "Opening offer..."
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         });
 }
 
 
 /* =========================================================
-   COPY COUPON
+   COUPON
 ========================================================= */
 
 function copyCoupon() {
@@ -705,33 +796,44 @@ function copyCoupon() {
    DISHES
 ========================================================= */
 
-function renderDishes() {
+function renderDishes(
+    dishList = null
+) {
 
     const grid =
-        document.getElementById("dishGrid");
+        document.getElementById(
+            "dishGrid"
+        );
 
     if (!grid) return;
 
 
-    let filteredDishes;
+    let list;
 
 
-    if (selectedCategory === "All") {
+    if (dishList) {
 
-        filteredDishes = dishes;
+        list = dishList;
+
+    } else if (
+        selectedCategory === "All"
+    ) {
+
+        list = dishes;
 
     } else {
 
-        filteredDishes =
+        list =
             dishes.filter(
                 dish =>
-                    dish.category === selectedCategory
+                    dish.category ===
+                    selectedCategory
             );
 
     }
 
 
-    if (filteredDishes.length === 0) {
+    if (!list.length) {
 
         grid.innerHTML = `
             <div class="empty-state">
@@ -744,9 +846,8 @@ function renderDishes() {
 
 
     grid.innerHTML =
-        filteredDishes.map(
-            dish => createDishCard(dish)
-        ).join("");
+        list.map(createDishCard)
+            .join("");
 
 
     setupDishButtons();
@@ -759,6 +860,11 @@ function renderDishes() {
 
 function createDishCard(dish) {
 
+    const favourite =
+        favourites.includes(
+            dish.id
+        );
+
     return `
         <article
             class="dish-card"
@@ -769,21 +875,24 @@ function createDishCard(dish) {
 
                 <img
                     src="${dish.image}"
-                    alt="${dish.name}"
+                    alt="${escapeHTML(dish.name)}"
                     loading="lazy"
                 >
 
 
                 <button
-                    class="dish-heart"
-                    aria-label="Favourite dish"
                     type="button"
+                    class="dish-heart ${
+                        favourite ? "active" : ""
+                    }"
+                    data-dish-favourite="${dish.id}"
+                    aria-label="${
+                        favourite
+                            ? "Remove dish from favourites"
+                            : "Favourite dish"
+                    }"
                 >
-
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
-                    </svg>
-
+                    <span class="heart-icon"></span>
                 </button>
 
             </div>
@@ -792,12 +901,14 @@ function createDishCard(dish) {
             <div class="dish-info">
 
                 <h3 class="dish-name">
-                    ${dish.name}
+                    ${escapeHTML(dish.name)}
                 </h3>
 
 
                 <p class="dish-restaurant">
-                    ${dish.restaurant}
+                    ${escapeHTML(
+                        dish.restaurant
+                    )}
                 </p>
 
 
@@ -809,8 +920,8 @@ function createDishCard(dish) {
 
 
                     <button
-                        class="add-dish-button"
                         type="button"
+                        class="add-dish-button"
                         data-dish="${dish.id}"
                     >
                         ADD +
@@ -832,55 +943,100 @@ function createDishCard(dish) {
 function setupDishButtons() {
 
     document
-        .querySelectorAll("[data-dish]")
+        .querySelectorAll(
+            "[data-dish]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", event => {
+            button.addEventListener(
+                "click",
+                event => {
 
-                event.stopPropagation();
+                    event.stopPropagation();
+
+                    const id =
+                        Number(
+                            button.dataset.dish
+                        );
+
+                    const dish =
+                        dishes.find(
+                            item =>
+                                item.id === id
+                        );
+
+                    if (!dish) return;
 
 
-                const id =
-                    Number(button.dataset.dish);
+                    addToCart({
+                        id: dish.id,
+                        name: dish.name,
+                        price: dish.price,
+                        image: dish.image,
+                        restaurant:
+                            dish.restaurant,
+                        quantity: 1
+                    });
 
-
-                const dish =
-                    dishes.find(
-                        item => item.id === id
-                    );
-
-
-                if (!dish) return;
-
-
-                addToCart({
-                    id: dish.id,
-                    name: dish.name,
-                    price: dish.price,
-                    image: dish.image,
-                    restaurant: dish.restaurant,
-                    quantity: 1
-                });
-
-            });
+                }
+            );
 
         });
 
 
     document
-        .querySelectorAll(".dish-heart")
+        .querySelectorAll(
+            "[data-dish-favourite]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", event => {
+            button.addEventListener(
+                "click",
+                event => {
 
-                event.stopPropagation();
+                    event.stopPropagation();
 
-                button.classList.toggle("active");
+                    const id =
+                        Number(
+                            button.dataset
+                                .dishFavourite
+                        );
 
-            });
+
+                    if (
+                        favourites.includes(id)
+                    ) {
+
+                        favourites =
+                            favourites.filter(
+                                item =>
+                                    item !== id
+                            );
+
+                        button.classList.remove(
+                            "active"
+                        );
+
+                    } else {
+
+                        favourites.push(id);
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                    }
+
+
+                    saveStorage(
+                        "eatergoFavourites",
+                        favourites
+                    );
+
+                }
+            );
 
         });
-
 }
 
 
@@ -892,7 +1048,8 @@ function addToCart(item) {
 
     const existing =
         cart.find(
-            cartItem => cartItem.id === item.id
+            cartItem =>
+                cartItem.id === item.id
         );
 
 
@@ -907,9 +1064,9 @@ function addToCart(item) {
     }
 
 
-    localStorage.setItem(
+    saveStorage(
         "eatergoCart",
-        JSON.stringify(cart)
+        cart
     );
 
 
@@ -921,43 +1078,55 @@ function addToCart(item) {
 }
 
 
-/* =========================================================
-   CART COUNT
-========================================================= */
-
 function updateCartCount() {
 
     const total =
         cart.reduce(
             (sum, item) =>
-                sum + Number(item.quantity || 0),
+                sum +
+                Number(
+                    item.quantity || 0
+                ),
             0
         );
 
 
     const desktopCount =
-        document.getElementById("cartCount");
+        document.getElementById(
+            "cartCount"
+        );
 
     const mobileCount =
-        document.getElementById("mobileCartCount");
+        document.getElementById(
+            "mobileCartCount"
+        );
 
 
-    if (desktopCount) {
+    updateCountElement(
+        desktopCount,
+        total
+    );
 
-        desktopCount.textContent = total;
+    updateCountElement(
+        mobileCount,
+        total
+    );
+}
 
-        desktopCount.style.display =
-            total > 0 ? "flex" : "none";
-    }
 
+function updateCountElement(
+    element,
+    total
+) {
 
-    if (mobileCount) {
+    if (!element) return;
 
-        mobileCount.textContent = total;
+    element.textContent = total;
 
-        mobileCount.style.display =
-            total > 0 ? "flex" : "none";
-    }
+    element.style.display =
+        total > 0
+            ? "flex"
+            : "none";
 }
 
 
@@ -968,13 +1137,19 @@ function updateCartCount() {
 function setupSearch() {
 
     const headerSearch =
-        document.getElementById("headerSearch");
+        document.getElementById(
+            "headerSearch"
+        );
 
     const heroSearch =
-        document.getElementById("heroSearch");
+        document.getElementById(
+            "heroSearch"
+        );
 
     const heroSearchBtn =
-        document.getElementById("heroSearchBtn");
+        document.getElementById(
+            "heroSearchBtn"
+        );
 
 
     if (headerSearch) {
@@ -983,7 +1158,9 @@ function setupSearch() {
             "keydown",
             event => {
 
-                if (event.key === "Enter") {
+                if (
+                    event.key === "Enter"
+                ) {
 
                     performSearch(
                         headerSearch.value
@@ -1003,7 +1180,9 @@ function setupSearch() {
             "keydown",
             event => {
 
-                if (event.key === "Enter") {
+                if (
+                    event.key === "Enter"
+                ) {
 
                     performSearch(
                         heroSearch.value
@@ -1024,25 +1203,24 @@ function setupSearch() {
             () => {
 
                 performSearch(
-                    heroSearch?.value || ""
+                    heroSearch
+                        ? heroSearch.value
+                        : ""
                 );
 
             }
         );
 
     }
-
 }
 
-
-/* =========================================================
-   PERFORM SEARCH
-========================================================= */
 
 function performSearch(value) {
 
     const search =
-        value.trim().toLowerCase();
+        String(value || "")
+            .trim()
+            .toLowerCase();
 
 
     if (!search) {
@@ -1056,54 +1234,58 @@ function performSearch(value) {
 
 
     const restaurantMatches =
-        restaurants.filter(restaurant => {
+        restaurants.filter(
+            restaurant => {
 
-            return (
-                restaurant.name
-                    .toLowerCase()
-                    .includes(search)
+                return (
+                    restaurant.name
+                        .toLowerCase()
+                        .includes(search)
 
-                ||
+                    ||
 
-                restaurant.cuisine
-                    .toLowerCase()
-                    .includes(search)
+                    restaurant.cuisine
+                        .toLowerCase()
+                        .includes(search)
 
-                ||
+                    ||
 
-                restaurant.category.some(
-                    category =>
-                        category
-                            .toLowerCase()
-                            .includes(search)
-                )
-            );
+                    restaurant.category.some(
+                        category =>
+                            category
+                                .toLowerCase()
+                                .includes(search)
+                    )
+                );
 
-        });
+            }
+        );
 
 
     const dishMatches =
-        dishes.filter(dish => {
+        dishes.filter(
+            dish => {
 
-            return (
-                dish.name
-                    .toLowerCase()
-                    .includes(search)
+                return (
+                    dish.name
+                        .toLowerCase()
+                        .includes(search)
 
-                ||
+                    ||
 
-                dish.restaurant
-                    .toLowerCase()
-                    .includes(search)
+                    dish.restaurant
+                        .toLowerCase()
+                        .includes(search)
 
-                ||
+                    ||
 
-                dish.category
-                    .toLowerCase()
-                    .includes(search)
-            );
+                    dish.category
+                        .toLowerCase()
+                        .includes(search)
+                );
 
-        });
+            }
+        );
 
 
     if (
@@ -1119,73 +1301,83 @@ function performSearch(value) {
     }
 
 
-    if (restaurantMatches.length > 0) {
+    renderSearchRestaurants(
+        restaurantMatches
+    );
 
-        renderSearchRestaurants(
-            restaurantMatches
-        );
-
-    }
-
-
-    if (dishMatches.length > 0) {
-
-        renderSearchDishes(
-            dishMatches
-        );
-
-    }
+    renderSearchDishes(
+        dishMatches
+    );
 
 
-    scrollToSection("restaurantGrid");
+    scrollToSection(
+        "restaurantGrid"
+    );
 
 
     showToast(
-        `${restaurantMatches.length + dishMatches.length} results found`
+        `${
+            restaurantMatches.length +
+            dishMatches.length
+        } results found`
     );
 }
 
 
 /* =========================================================
-   SEARCH RESTAURANTS
+   SEARCH RESULTS
 ========================================================= */
 
-function renderSearchRestaurants(results) {
+function renderSearchRestaurants(
+    results
+) {
 
     const grid =
-        document.getElementById("restaurantGrid");
+        document.getElementById(
+            "restaurantGrid"
+        );
 
     if (!grid) return;
 
 
     grid.innerHTML =
-        results.map(
-            restaurant =>
-                createRestaurantCard(restaurant)
-        ).join("");
+        results.length
+            ? results
+                .map(createRestaurantCard)
+                .join("")
+            : `
+                <div class="empty-state">
+                    No matching restaurants.
+                </div>
+            `;
 
 
     setupFavouriteButtons();
 }
 
 
-/* =========================================================
-   SEARCH DISHES
-========================================================= */
-
-function renderSearchDishes(results) {
+function renderSearchDishes(
+    results
+) {
 
     const grid =
-        document.getElementById("dishGrid");
+        document.getElementById(
+            "dishGrid"
+        );
 
     if (!grid) return;
 
 
     grid.innerHTML =
-        results.map(
-            dish =>
-                createDishCard(dish)
-        ).join("");
+        results.length
+            ? results
+                .map(createDishCard)
+                .join("")
+            : `
+                <div class="empty-state">
+                    No matching dishes.
+                </div>
+            `;
 
 
     setupDishButtons();
@@ -1199,40 +1391,57 @@ function renderSearchDishes(results) {
 function renderCollections() {
 
     const grid =
-        document.getElementById("collectionGrid");
+        document.getElementById(
+            "collectionGrid"
+        );
 
     if (!grid) return;
 
 
     grid.innerHTML =
-        collections.map(collection => {
+        collections
+            .map(collection => {
 
-            return `
-                <article class="collection-card">
-
-                    <img
-                        src="${collection.image}"
-                        alt="${collection.title}"
-                        loading="lazy"
+                return `
+                    <article
+                        class="collection-card"
                     >
 
+                        <img
+                            src="${collection.image}"
+                            alt="${escapeHTML(
+                                collection.title
+                            )}"
+                            loading="lazy"
+                        >
 
-                    <div class="collection-content">
+                        <div
+                            class="collection-content"
+                        >
 
-                        <h3 class="collection-title">
-                            ${collection.title}
-                        </h3>
+                            <h3
+                                class="collection-title"
+                            >
+                                ${escapeHTML(
+                                    collection.title
+                                )}
+                            </h3>
 
-                        <p class="collection-description">
-                            ${collection.description}
-                        </p>
+                            <p
+                                class="collection-description"
+                            >
+                                ${escapeHTML(
+                                    collection.description
+                                )}
+                            </p>
 
-                    </div>
+                        </div>
 
-                </article>
-            `;
+                    </article>
+                `;
 
-        }).join("");
+            })
+            .join("");
 }
 
 
@@ -1242,14 +1451,18 @@ function renderCollections() {
 
 function setupTheme() {
 
-    const themeButton =
-        document.getElementById("themeBtn");
+    const button =
+        document.getElementById(
+            "themeBtn"
+        );
 
-    if (!themeButton) return;
+    if (!button) return;
 
 
     const savedTheme =
-        localStorage.getItem("eatergoTheme");
+        localStorage.getItem(
+            "eatergoTheme"
+        );
 
 
     if (savedTheme === "dark") {
@@ -1261,7 +1474,7 @@ function setupTheme() {
     }
 
 
-    themeButton.addEventListener(
+    button.addEventListener(
         "click",
         () => {
 
@@ -1270,7 +1483,7 @@ function setupTheme() {
             );
 
 
-            const isDark =
+            const dark =
                 document.body.classList.contains(
                     "dark-mode"
                 );
@@ -1278,12 +1491,14 @@ function setupTheme() {
 
             localStorage.setItem(
                 "eatergoTheme",
-                isDark ? "dark" : "light"
+                dark
+                    ? "dark"
+                    : "light"
             );
 
 
             showToast(
-                isDark
+                dark
                     ? "Dark mode enabled"
                     : "Light mode enabled"
             );
@@ -1300,10 +1515,14 @@ function setupTheme() {
 function setupMobileMenu() {
 
     const button =
-        document.getElementById("mobileMenuBtn");
+        document.getElementById(
+            "mobileMenuBtn"
+        );
 
     const menu =
-        document.getElementById("mobileMenu");
+        document.getElementById(
+            "mobileMenu"
+        );
 
 
     if (!button || !menu) return;
@@ -1313,7 +1532,15 @@ function setupMobileMenu() {
         "click",
         () => {
 
-            menu.classList.toggle("open");
+            const open =
+                menu.classList.toggle(
+                    "open"
+                );
+
+            button.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
 
         }
     );
@@ -1331,11 +1558,15 @@ function setupMobileMenu() {
                         "open"
                     );
 
+                    button.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
                 }
             );
 
         });
-
 }
 
 
@@ -1345,16 +1576,17 @@ function setupMobileMenu() {
 
 function setupLocationButtons() {
 
-    const locationButtons = [
-        document.getElementById("locationBtn"),
-        document.getElementById("heroLocationBtn")
-    ];
+    const buttons = [
+        document.getElementById(
+            "locationBtn"
+        ),
+        document.getElementById(
+            "heroLocationBtn"
+        )
+    ].filter(Boolean);
 
 
-    locationButtons.forEach(button => {
-
-        if (!button) return;
-
+    buttons.forEach(button => {
 
         button.addEventListener(
             "click",
@@ -1363,100 +1595,87 @@ function setupLocationButtons() {
                 const location =
                     prompt(
                         "Enter your location",
-                        "Surat"
+                        getCurrentLocation()
                     );
 
 
                 if (
-                    location &&
-                    location.trim()
-                ) {
-
-                    const cleanLocation =
-                        location.trim();
+                    !location ||
+                    !location.trim()
+                ) return;
 
 
-                    const currentLocation =
-                        document.getElementById(
-                            "currentLocation"
-                        );
-
-                    const heroLocation =
-                        document.getElementById(
-                            "heroLocation"
-                        );
+                const cleanLocation =
+                    location.trim();
 
 
-                    if (currentLocation) {
-
-                        currentLocation.textContent =
-                            cleanLocation;
-
-                    }
+                setLocation(
+                    cleanLocation
+                );
 
 
-                    if (heroLocation) {
-
-                        heroLocation.textContent =
-                            cleanLocation;
-
-                    }
-
-
-                    localStorage.setItem(
-                        "eatergoLocation",
-                        cleanLocation
-                    );
-
-
-                    showToast(
-                        `Location changed to ${cleanLocation}`
-                    );
-
-                }
+                showToast(
+                    `Location changed to ${cleanLocation}`
+                );
 
             }
         );
 
     });
+}
 
 
-    const savedLocation =
-        localStorage.getItem(
-            "eatergoLocation"
+function setLocation(location) {
+
+    const currentLocation =
+        document.getElementById(
+            "currentLocation"
+        );
+
+    const heroLocation =
+        document.getElementById(
+            "heroLocation"
         );
 
 
-    if (savedLocation) {
+    if (currentLocation) {
 
-        const currentLocation =
-            document.getElementById(
-                "currentLocation"
-            );
-
-        const heroLocation =
-            document.getElementById(
-                "heroLocation"
-            );
-
-
-        if (currentLocation) {
-
-            currentLocation.textContent =
-                savedLocation;
-
-        }
-
-
-        if (heroLocation) {
-
-            heroLocation.textContent =
-                savedLocation;
-
-        }
+        currentLocation.textContent =
+            location;
 
     }
 
+
+    if (heroLocation) {
+
+        heroLocation.textContent =
+            location;
+
+    }
+
+
+    localStorage.setItem(
+        "eatergoLocation",
+        location
+    );
+}
+
+
+function getCurrentLocation() {
+
+    return (
+        localStorage.getItem(
+            "eatergoLocation"
+        ) || "Surat"
+    );
+}
+
+
+function restoreLocation() {
+
+    setLocation(
+        getCurrentLocation()
+    );
 }
 
 
@@ -1467,10 +1686,14 @@ function setupLocationButtons() {
 function setupHeaderButtons() {
 
     const wishlist =
-        document.getElementById("wishlistBtn");
+        document.getElementById(
+            "wishlistBtn"
+        );
 
     const cartButton =
-        document.getElementById("cartBtn");
+        document.getElementById(
+            "cartBtn"
+        );
 
 
     if (wishlist) {
@@ -1480,7 +1703,7 @@ function setupHeaderButtons() {
             () => {
 
                 showToast(
-                    favourites.length > 0
+                    favourites.length
                         ? `${favourites.length} favourite items`
                         : "No favourite items yet"
                 );
@@ -1504,7 +1727,6 @@ function setupHeaderButtons() {
         );
 
     }
-
 }
 
 
@@ -1515,13 +1737,19 @@ function setupHeaderButtons() {
 function setupOfferSlider() {
 
     const grid =
-        document.getElementById("offerGrid");
+        document.getElementById(
+            "offerGrid"
+        );
 
     const previous =
-        document.getElementById("offerPrev");
+        document.getElementById(
+            "offerPrev"
+        );
 
     const next =
-        document.getElementById("offerNext");
+        document.getElementById(
+            "offerNext"
+        );
 
 
     if (!grid) return;
@@ -1534,7 +1762,7 @@ function setupOfferSlider() {
             () => {
 
                 grid.scrollBy({
-                    left: -300,
+                    left: -320,
                     behavior: "smooth"
                 });
 
@@ -1551,7 +1779,7 @@ function setupOfferSlider() {
             () => {
 
                 grid.scrollBy({
-                    left: 300,
+                    left: 320,
                     behavior: "smooth"
                 });
 
@@ -1559,7 +1787,6 @@ function setupOfferSlider() {
         );
 
     }
-
 }
 
 
@@ -1567,13 +1794,12 @@ function setupOfferSlider() {
    TOAST
 ========================================================= */
 
-let toastTimer;
-
-
 function showToast(message) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
     const toastMessage =
         document.getElementById(
@@ -1581,31 +1807,42 @@ function showToast(message) {
         );
 
 
-    if (!toast || !toastMessage) return;
+    if (
+        !toast ||
+        !toastMessage
+    ) return;
 
 
-    toastMessage.textContent = message;
+    toastMessage.textContent =
+        message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
-    clearTimeout(toastTimer);
+    clearTimeout(
+        toastTimer
+    );
 
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        }, 2500);
+            },
+            2500
+        );
 }
 
 
 /* =========================================================
-   SCROLL TO SECTION
+   SCROLL
 ========================================================= */
 
 function scrollToSection(id) {
@@ -1616,37 +1853,83 @@ function scrollToSection(id) {
     if (!element) return;
 
 
-    const headerHeight = 60;
+    const header =
+        document.querySelector(
+            ".site-header, header"
+        );
+
+
+    const headerHeight =
+        header
+            ? header.offsetHeight
+            : 60;
 
 
     const position =
-        element.getBoundingClientRect().top +
+        element.getBoundingClientRect()
+            .top +
         window.scrollY -
-        headerHeight;
+        headerHeight -
+        12;
 
 
     window.scrollTo({
-        top: position,
+        top: Math.max(0, position),
         behavior: "smooth"
     });
 }
 
 
 /* =========================================================
-   GLOBAL IMAGE ERROR HANDLER
+   HTML SAFETY
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+}
+
+
+/* =========================================================
+   IMAGE FALLBACK
 ========================================================= */
 
 document.addEventListener(
     "error",
     event => {
 
+        const image =
+            event.target;
+
+
         if (
-            event.target &&
-            event.target.tagName === "IMG"
+            image &&
+            image.tagName === "IMG"
         ) {
 
-            event.target.style.background =
-                "#eeeeee";
+            image.classList.add(
+                "image-error"
+            );
 
         }
 
