@@ -18,9 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-    <!-- CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
-    
 </head>
 
 <body>
@@ -35,35 +34,44 @@
 
         <!-- Logo -->
         <a href="index.html" class="logo">
+
             <span class="logo-chef">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 9V6.5C7 4.57 8.57 3 10.5 3c.93 0 1.77.36 2.39.95A3.48 3.48 0 0 1 15.5 3C17.43 3 19 4.57 19 6.5V9"/>
-                    <path d="M6 9h13v4c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V9Z"/>
-                    <path d="M8 15v5M16 15v5"/>
-                </svg>
+                <img
+                    src="https://img.icons8.com/fluency/48/chef-hat.png"
+                    alt="Eatergo"
+                >
             </span>
 
             <span class="logo-text">
                 Eater<span>go</span>
             </span>
+
         </a>
 
 
         <!-- Location -->
-        <button class="location-selector" id="locationBtn">
+        <button
+            class="location-selector"
+            id="locationBtn"
+            type="button"
+        >
 
             <span class="location-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
-                    <circle cx="12" cy="9" r="2.2"/>
-                </svg>
+                <img
+                    src="https://img.icons8.com/fluency/48/marker.png"
+                    alt=""
+                >
             </span>
 
-            <span id="currentLocation">Surat</span>
+            <span id="currentLocation">
+                Surat
+            </span>
 
-            <svg class="chevron-icon" viewBox="0 0 24 24">
-                <path d="m7 10 5 5 5-5"/>
-            </svg>
+            <img
+                class="chevron-icon"
+                src="https://img.icons8.com/material-rounded/24/expand-arrow.png"
+                alt=""
+            >
 
         </button>
 
@@ -71,10 +79,10 @@
         <!-- Desktop Search -->
         <div class="header-search">
 
-            <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="m16.5 16.5 4 4"/>
-            </svg>
+            <img
+                src="https://img.icons8.com/material-rounded/24/search.png"
+                alt=""
+            >
 
             <input
                 type="text"
@@ -89,19 +97,31 @@
         <!-- Navigation -->
         <nav class="desktop-nav">
 
-            <a href="index.html" class="nav-link active">
+            <a
+                href="index.html"
+                class="nav-link active"
+            >
                 Home
             </a>
 
-            <a href="restaurants.html" class="nav-link">
+            <a
+                href="restaurants.html"
+                class="nav-link"
+            >
                 Restaurants
             </a>
 
-            <a href="#offers" class="nav-link">
+            <a
+                href="#offers"
+                class="nav-link"
+            >
                 Offers
             </a>
 
-            <a href="#collections" class="nav-link">
+            <a
+                href="#collections"
+                class="nav-link"
+            >
                 Collections
             </a>
 
@@ -116,15 +136,21 @@
                 class="icon-button theme-button"
                 id="themeBtn"
                 aria-label="Toggle theme"
+                type="button"
             >
-                <svg class="sun-icon" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="4"/>
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
-                </svg>
 
-                <svg class="moon-icon" viewBox="0 0 24 24">
-                    <path d="M21 14.8A8.5 8.5 0 0 1 9.2 3a8.5 8.5 0 1 0 11.8 11.8Z"/>
-                </svg>
+                <img
+                    class="sun-icon"
+                    src="https://img.icons8.com/fluency/48/sun.png"
+                    alt="Light mode"
+                >
+
+                <img
+                    class="moon-icon"
+                    src="https://img.icons8.com/fluency/48/crescent-moon.png"
+                    alt="Dark mode"
+                >
+
             </button>
 
 
@@ -133,10 +159,14 @@
                 class="icon-button"
                 id="wishlistBtn"
                 aria-label="Wishlist"
+                type="button"
             >
-                <svg viewBox="0 0 24 24">
-                    <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
-                </svg>
+
+                <img
+                    src="https://img.icons8.com/fluency/48/like.png"
+                    alt="Wishlist"
+                >
+
             </button>
 
 
@@ -145,25 +175,38 @@
                 class="icon-button cart-button"
                 id="cartBtn"
                 aria-label="Shopping cart"
+                type="button"
             >
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
-                    <circle cx="9" cy="20" r="1"/>
-                    <circle cx="18" cy="20" r="1"/>
-                </svg>
 
-                <span class="cart-count" id="cartCount">0</span>
+                <img
+                    src="https://img.icons8.com/fluency/48/shopping-cart.png"
+                    alt="Cart"
+                >
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
+
             </button>
 
 
             <!-- Login -->
-            <a href="login.html" class="login-button">
+            <a
+                href="login.html"
+                class="login-button"
+            >
                 Login
             </a>
 
 
             <!-- Signup -->
-            <a href="signup.html" class="signup-button">
+            <a
+                href="signup.html"
+                class="signup-button"
+            >
                 Sign Up
             </a>
 
@@ -175,6 +218,7 @@
             class="mobile-menu-button"
             id="mobileMenuBtn"
             aria-label="Open menu"
+            type="button"
         >
             <span></span>
             <span></span>
@@ -190,16 +234,37 @@
      MOBILE MENU
 ========================================================= -->
 
-<div class="mobile-menu" id="mobileMenu">
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
 
-    <a href="index.html">Home</a>
-    <a href="restaurants.html">Restaurants</a>
-    <a href="#offers">Offers</a>
-    <a href="#collections">Collections</a>
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="restaurants.html">
+        Restaurants
+    </a>
+
+    <a href="#offers">
+        Offers
+    </a>
+
+    <a href="#collections">
+        Collections
+    </a>
 
     <div class="mobile-menu-buttons">
-        <a href="login.html">Login</a>
-        <a href="signup.html">Sign Up</a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+        <a href="signup.html">
+            Sign Up
+        </a>
+
     </div>
 
 </div>
@@ -240,20 +305,26 @@
             <div class="hero-search">
 
                 <!-- Location -->
-                <button class="hero-location" id="heroLocationBtn">
+                <button
+                    class="hero-location"
+                    id="heroLocationBtn"
+                    type="button"
+                >
 
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
-                        <circle cx="12" cy="9" r="2.2"/>
-                    </svg>
+                    <img
+                        src="https://img.icons8.com/fluency/48/marker.png"
+                        alt=""
+                    >
 
                     <span id="heroLocation">
                         Surat
                     </span>
 
-                    <svg class="hero-chevron" viewBox="0 0 24 24">
-                        <path d="m7 10 5 5 5-5"/>
-                    </svg>
+                    <img
+                        class="hero-chevron"
+                        src="https://img.icons8.com/material-rounded/24/expand-arrow.png"
+                        alt=""
+                    >
 
                 </button>
 
@@ -264,15 +335,16 @@
                 <!-- Search Input -->
                 <div class="hero-search-input">
 
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="7"/>
-                        <path d="m16.5 16.5 4 4"/>
-                    </svg>
+                    <img
+                        src="https://img.icons8.com/material-rounded/24/search.png"
+                        alt=""
+                    >
 
                     <input
                         type="text"
                         id="heroSearch"
                         placeholder="Search restaurants, dishes or cuisines..."
+                        autocomplete="off"
                     >
 
                 </div>
@@ -281,6 +353,7 @@
                 <button
                     class="hero-search-button"
                     id="heroSearchBtn"
+                    type="button"
                 >
                     Search
                 </button>
@@ -311,7 +384,7 @@
             class="category-container"
             id="categoryContainer"
         >
-            <!-- JavaScript will load categories -->
+            <!-- JavaScript loads food category images -->
         </div>
 
     </section>
@@ -328,10 +401,12 @@
             <div class="section-title-wrap">
 
                 <span class="section-title-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
-                        <circle cx="12" cy="9" r="2.2"/>
-                    </svg>
+
+                    <img
+                        src="https://img.icons8.com/fluency/48/marker.png"
+                        alt=""
+                    >
+
                 </span>
 
                 <h2>
@@ -346,9 +421,12 @@
                 class="view-all"
             >
                 View All
-                <svg viewBox="0 0 24 24">
-                    <path d="m9 5 7 7-7 7"/>
-                </svg>
+
+                <img
+                    src="https://img.icons8.com/material-rounded/24/forward.png"
+                    alt=""
+                >
+
             </a>
 
         </div>
@@ -359,7 +437,7 @@
             class="restaurant-grid"
             id="restaurantGrid"
         >
-            <!-- JavaScript -->
+            <!-- JavaScript loads restaurant cards -->
         </div>
 
     </section>
@@ -374,16 +452,42 @@
         id="offers"
     >
 
+        <div class="section-header">
+
+            <div class="section-title-wrap">
+
+                <span class="section-title-icon">
+
+                    <img
+                        src="https://img.icons8.com/fluency/48/discount.png"
+                        alt=""
+                    >
+
+                </span>
+
+                <h2>
+                    Popular Offers
+                </h2>
+
+            </div>
+
+        </div>
+
+
         <div class="offer-slider">
 
             <button
                 class="slider-arrow slider-prev"
                 id="offerPrev"
                 aria-label="Previous offers"
+                type="button"
             >
-                <svg viewBox="0 0 24 24">
-                    <path d="m15 5-7 7 7 7"/>
-                </svg>
+
+                <img
+                    src="https://img.icons8.com/material-rounded/24/back.png"
+                    alt=""
+                >
+
             </button>
 
 
@@ -391,7 +495,7 @@
                 class="offer-grid"
                 id="offerGrid"
             >
-                <!-- JavaScript -->
+                <!-- JavaScript loads offers -->
             </div>
 
 
@@ -399,10 +503,14 @@
                 class="slider-arrow slider-next"
                 id="offerNext"
                 aria-label="Next offers"
+                type="button"
             >
-                <svg viewBox="0 0 24 24">
-                    <path d="m9 5 7 7-7 7"/>
-                </svg>
+
+                <img
+                    src="https://img.icons8.com/material-rounded/24/forward.png"
+                    alt=""
+                >
+
             </button>
 
         </div>
@@ -432,12 +540,12 @@
             <div class="section-title-wrap">
 
                 <span class="section-title-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M6 3v7a3 3 0 0 0 6 0V3"/>
-                        <path d="M9 3v18"/>
-                        <path d="M16 3v18"/>
-                        <path d="M16 3c3 1 4 3 4 6s-1 4-4 4"/>
-                    </svg>
+
+                    <img
+                        src="https://img.icons8.com/fluency/48/restaurant.png"
+                        alt=""
+                    >
+
                 </span>
 
                 <h2>
@@ -452,9 +560,12 @@
                 class="view-all"
             >
                 View All
-                <svg viewBox="0 0 24 24">
-                    <path d="m9 5 7 7-7 7"/>
-                </svg>
+
+                <img
+                    src="https://img.icons8.com/material-rounded/24/forward.png"
+                    alt=""
+                >
+
             </a>
 
         </div>
@@ -464,7 +575,7 @@
             class="dish-grid"
             id="dishGrid"
         >
-            <!-- JavaScript -->
+            <!-- JavaScript loads dishes -->
         </div>
 
     </section>
@@ -483,6 +594,15 @@
 
             <div class="section-title-wrap">
 
+                <span class="section-title-icon">
+
+                    <img
+                        src="https://img.icons8.com/fluency/48/collection.png"
+                        alt=""
+                    >
+
+                </span>
+
                 <h2>
                     Explore Collections
                 </h2>
@@ -496,7 +616,7 @@
             class="collection-grid"
             id="collectionGrid"
         >
-            <!-- JavaScript -->
+            <!-- JavaScript loads collections -->
         </div>
 
     </section>
@@ -504,7 +624,7 @@
 
     <!-- =====================================================
          WHY EATERGO
-    ====================================================== -->
+========================================================= -->
 
     <section class="why-section">
 
@@ -531,13 +651,16 @@
 
             <div class="why-grid">
 
+                <!-- Smart Food Finder -->
                 <div class="why-card">
 
                     <div class="why-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="7"/>
-                            <path d="m16.5 16.5 4 4"/>
-                        </svg>
+
+                        <img
+                            src="https://img.icons8.com/fluency/48/search.png"
+                            alt=""
+                        >
+
                     </div>
 
                     <h3>
@@ -552,13 +675,16 @@
                 </div>
 
 
+                <!-- Nearby Restaurants -->
                 <div class="why-card">
 
                     <div class="why-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/>
-                            <circle cx="12" cy="9" r="2"/>
-                        </svg>
+
+                        <img
+                            src="https://img.icons8.com/fluency/48/marker.png"
+                            alt=""
+                        >
+
                     </div>
 
                     <h3>
@@ -573,13 +699,16 @@
                 </div>
 
 
+                <!-- Easy Ordering -->
                 <div class="why-card">
 
                     <div class="why-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
-                            <path d="M20 4v6h-6"/>
-                        </svg>
+
+                        <img
+                            src="https://img.icons8.com/fluency/48/shopping-bag.png"
+                            alt=""
+                        >
+
                     </div>
 
                     <h3>
@@ -594,12 +723,16 @@
                 </div>
 
 
+                <!-- Trusted Reviews -->
                 <div class="why-card">
 
                     <div class="why-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 3 14.8 9l6.2.7-4.6 4.2 1.3 6.1L12 17l-5.7 3 1.3-6.1L3 9.7 9.2 9 12 3Z"/>
-                        </svg>
+
+                        <img
+                            src="https://img.icons8.com/fluency/48/star.png"
+                            alt=""
+                        >
+
                     </div>
 
                     <h3>
@@ -630,16 +763,21 @@
 
     <div class="footer-inner">
 
+        <!-- Brand -->
         <div class="footer-brand">
 
-            <a href="index.html" class="logo footer-logo">
+            <a
+                href="index.html"
+                class="logo footer-logo"
+            >
 
                 <span class="logo-chef">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M7 9V6.5C7 4.57 8.57 3 10.5 3c.93 0 1.77.36 2.39.95A3.48 3.48 0 0 1 15.5 3C17.43 3 19 4.57 19 6.5V9"/>
-                        <path d="M6 9h13v4c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V9Z"/>
-                        <path d="M8 15v5M16 15v5"/>
-                    </svg>
+
+                    <img
+                        src="https://img.icons8.com/fluency/48/chef-hat.png"
+                        alt=""
+                    >
+
                 </span>
 
                 <span class="logo-text">
@@ -656,6 +794,7 @@
         </div>
 
 
+        <!-- Company -->
         <div class="footer-column">
 
             <h4>
@@ -677,6 +816,7 @@
         </div>
 
 
+        <!-- Customers -->
         <div class="footer-column">
 
             <h4>
@@ -687,17 +827,18 @@
                 Restaurants
             </a>
 
-            <a href="#">
+            <a href="#offers">
                 Offers
             </a>
 
             <a href="#">
-                Help & Support
+                Help &amp; Support
             </a>
 
         </div>
 
 
+        <!-- Partners -->
         <div class="footer-column">
 
             <h4>
@@ -719,6 +860,7 @@
         </div>
 
 
+        <!-- Legal -->
         <div class="footer-column">
 
             <h4>
@@ -730,7 +872,7 @@
             </a>
 
             <a href="#">
-                Terms & Conditions
+                Terms &amp; Conditions
             </a>
 
             <a href="#">
@@ -748,26 +890,45 @@
             © 2026 Eatergo. All rights reserved.
         </p>
 
+
         <div class="social-links">
 
-            <a href="#" aria-label="Instagram">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="5"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <circle cx="17.5" cy="6.5" r="1"/>
-                </svg>
+            <a
+                href="#"
+                aria-label="Instagram"
+            >
+
+                <img
+                    src="https://img.icons8.com/fluency/48/instagram-new.png"
+                    alt="Instagram"
+                >
+
             </a>
 
-            <a href="#" aria-label="Facebook">
-                <svg viewBox="0 0 24 24">
-                    <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z"/>
-                </svg>
+
+            <a
+                href="#"
+                aria-label="Facebook"
+            >
+
+                <img
+                    src="https://img.icons8.com/fluency/48/facebook-new.png"
+                    alt="Facebook"
+                >
+
             </a>
 
-            <a href="#" aria-label="Twitter">
-                <svg viewBox="0 0 24 24">
-                    <path d="m4 4 6.2 7.3L4.4 20H7l4.4-5.2L15.8 20H20l-6.5-7.7L19.6 4H17l-4 4.7L8.2 4H4Z"/>
-                </svg>
+
+            <a
+                href="#"
+                aria-label="Twitter"
+            >
+
+                <img
+                    src="https://img.icons8.com/fluency/48/twitterx.png"
+                    alt="Twitter"
+                >
+
             </a>
 
         </div>
@@ -783,12 +944,16 @@
 
 <nav class="mobile-bottom-nav">
 
-    <a href="index.html" class="bottom-nav-item active">
+    <!-- Home -->
+    <a
+        href="index.html"
+        class="bottom-nav-item active"
+    >
 
-        <svg viewBox="0 0 24 24">
-            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/>
-            <path d="M9 21v-6h6v6"/>
-        </svg>
+        <img
+            src="https://img.icons8.com/fluency/48/home.png"
+            alt=""
+        >
 
         <span>
             Home
@@ -797,12 +962,16 @@
     </a>
 
 
-    <a href="restaurants.html" class="bottom-nav-item">
+    <!-- Search -->
+    <a
+        href="restaurants.html"
+        class="bottom-nav-item"
+    >
 
-        <svg viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="m16.5 16.5 4 4"/>
-        </svg>
+        <img
+            src="https://img.icons8.com/fluency/48/search.png"
+            alt=""
+        >
 
         <span>
             Search
@@ -811,12 +980,16 @@
     </a>
 
 
-    <a href="#offers" class="bottom-nav-item">
+    <!-- Offers -->
+    <a
+        href="#offers"
+        class="bottom-nav-item"
+    >
 
-        <svg viewBox="0 0 24 24">
-            <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
-            <path d="M20 4v6h-6"/>
-        </svg>
+        <img
+            src="https://img.icons8.com/fluency/48/discount.png"
+            alt=""
+        >
 
         <span>
             Offers
@@ -825,11 +998,16 @@
     </a>
 
 
-    <a href="#" class="bottom-nav-item">
+    <!-- Favourites -->
+    <a
+        href="#"
+        class="bottom-nav-item"
+    >
 
-        <svg viewBox="0 0 24 24">
-            <path d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
-        </svg>
+        <img
+            src="https://img.icons8.com/fluency/48/like.png"
+            alt=""
+        >
 
         <span>
             Favourites
@@ -838,15 +1016,18 @@
     </a>
 
 
-    <a href="cart.html" class="bottom-nav-item bottom-cart">
+    <!-- Cart -->
+    <a
+        href="cart.html"
+        class="bottom-nav-item bottom-cart"
+    >
 
         <span class="bottom-cart-icon">
 
-            <svg viewBox="0 0 24 24">
-                <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
-                <circle cx="9" cy="20" r="1"/>
-                <circle cx="18" cy="20" r="1"/>
-            </svg>
+            <img
+                src="https://img.icons8.com/fluency/48/shopping-cart.png"
+                alt=""
+            >
 
             <span
                 class="cart-count bottom-cart-count"
@@ -875,11 +1056,13 @@
     id="toast"
     role="alert"
 >
+
     <span class="toast-icon">
 
-        <svg viewBox="0 0 24 24">
-            <path d="m5 12 4 4L19 6"/>
-        </svg>
+        <img
+            src="https://img.icons8.com/fluency/48/checkmark.png"
+            alt=""
+        >
 
     </span>
 
@@ -893,8 +1076,8 @@
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
-<script src="./js/scripts.js"></script>
 
+<script src="./js/scripts.js"></script>
 
 </body>
 </html>
