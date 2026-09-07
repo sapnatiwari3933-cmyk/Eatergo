@@ -1,58 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eatergo | Discover Food</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eatergo - Discover Your Next Favourite Meal</title>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="logo">🍽️ Eatergo</div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search restaurants, dishes or cuisines">
-      <button>🔍</button>
+
+
+<header class="header">
+
+    <div class="logo">
+        <a href="index.html">Eater<span>go</span></a>
     </div>
-    <nav>
-      <a href="login.html">Login</a> | 
-      <a href="signup.html">Sign Up</a> | 
-      <a href="cart.html">🛒 Cart</a>
+
+    <div class="location">
+        📍
+        <span>Select Location</span>
+    </div>
+
+    <div class="search-box">
+        🔍
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for restaurants, dishes or cuisines"
+        >
+    </div>
+
+    <nav class="nav">
+
+        <a href="index.html">Home</a>
+        <a href="restaurants.html">Restaurants</a>
+        <a href="#">Offers</a>
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+        <a href="cart.html" class="cart-btn">
+            🛒 Cart
+            <span id="cartCount">0</span>
+        </a>
+
     </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Discover your next favourite meal.</h1>
-    <p>Select location & explore categories</p>
-  </section>
+</header>
 
-  <!-- Quick Categories -->
-  <section class="categories">
-    <h2>Quick Categories</h2>
-    <div class="category-list">
-      <button>🍕 Pizza</button>
-      <button>🍔 Burgers</button>
-      <button>🍜 Chinese</button>
-      <button>🍛 Indian</button>
-      <button>🍰 Desserts</button>
-      <button>☕ Cafe</button>
-      <button>🥗 Healthy</button>
-      <button>🥘 Biryani</button>
+
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            🍽️ Food made for you
+        </span>
+
+        <h1>
+            Discover your next
+            <span>favourite meal.</span>
+        </h1>
+
+        <p>
+            Explore the best restaurants, delicious dishes
+            and amazing offers near you.
+        </p>
+
+        <div class="hero-search">
+
+            🔍
+
+            <input
+                type="text"
+                placeholder="Search pizza, biryani, burgers..."
+                id="heroSearch"
+            >
+
+            <button onclick="searchFood()">
+                Search
+            </button>
+
+        </div>
+
     </div>
-  </section>
 
-  <!-- Restaurant Cards -->
-  <section class="restaurants">
-    <h2>Restaurants Near You</h2>
-    <div class="restaurant-card">
-      <img src="assets/images/restaurant1.jpg" alt="Restaurant">
-      <h3>The Food Corner ⭐4.6</h3>
-      <p>Indian • North Indian</p>
-      <p>₹300 for two</p>
-      <p>🛵 25–30 min • 2.1 km</p>
-      <p>🔥 40% OFF</p>
+</section>
+
+
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+            <span class="small-title">EXPLORE</span>
+            <h2>What are you craving?</h2>
+        </div>
+
+        <a href="restaurants.html">
+            View all →
+        </a>
+
     </div>
-  </section>
+
+
+    <div class="categories">
+
+        <div class="category-card" onclick="searchCategory('Pizza')">
+            <div class="category-icon">🍕</div>
+            <h3>Pizza</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Burger')">
+            <div class="category-icon">🍔</div>
+            <h3>Burgers</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Chinese')">
+            <div class="category-icon">🍜</div>
+            <h3>Chinese</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Indian')">
+            <div class="category-icon">🍛</div>
+            <h3>Indian</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Desserts')">
+            <div class="category-icon">🍰</div>
+            <h3>Desserts</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Cafe')">
+            <div class="category-icon">☕</div>
+            <h3>Cafe</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Healthy')">
+            <div class="category-icon">🥗</div>
+            <h3>Healthy</h3>
+        </div>
+
+        <div class="category-card" onclick="searchCategory('Biryani')">
+            <div class="category-icon">🥘</div>
+            <h3>Biryani</h3>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+            <span class="small-title">NEAR YOU</span>
+            <h2>Restaurants you'll love</h2>
+        </div>
+
+        <a href="restaurants.html">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="restaurant-grid" id="restaurantList">
+
+        <!-- JavaScript cards yahan create karega -->
+
+    </div>
+
+</section>
+
+
+
+<section class="section">
+
+    <div class="section-title">
+        <div>
+            <span class="small-title">WHY EATERGO</span>
+            <h2>More than just food delivery</h2>
+        </div>
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature-card">
+            <div>🤖</div>
+            <h3>Smart Food Finder</h3>
+            <p>
+                Tell us what you want and we'll help
+                you find the perfect meal.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>🍽️</div>
+            <h3>Dish-first Search</h3>
+            <p>
+                Search directly for your favourite dish
+                instead of searching restaurants.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>❤️</div>
+            <h3>Personalised</h3>
+            <p>
+                Discover restaurants and dishes based
+                on your taste.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>⚡</div>
+            <h3>Fast Delivery</h3>
+            <p>
+                Get your favourite food delivered
+                quickly to your doorstep.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        Eater<span>go</span>
+    </div>
+
+    <p>
+        Discover your next favourite meal.
+    </p>
+
+    <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Eatergo. All rights reserved.
+    </p>
+
+</footer>
+
+
+<div class="mobile-nav">
+
+    <a href="index.html">
+        🏠
+        <span>Home</span>
+    </a>
+
+    <a href="restaurants.html">
+        🔍
+        <span>Search</span>
+    </a>
+
+    <a href="favourites.html">
+        ❤️
+        <span>Favourites</span>
+    </a>
+
+    <a href="orders.html">
+        📦
+        <span>Orders</span>
+    </a>
+
+    <a href="profile.html">
+        👤
+        <span>Profile</span>
+    </a>
+
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 </html>
